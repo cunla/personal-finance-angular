@@ -26,7 +26,10 @@
 
           <div class="form-group">
             <mat-form-field class="input-style">
-              <input matInput type="number" placeholder="Balance" class="form-control" formControlName="balance">
+              <input matInput placeholder="Opening balance" type="number" class="form-control"
+                     formControlName="balance">
+              <span matPrefix>$&nbsp;</span>
+              <span matSuffix>.00</span>
             </mat-form-field>
             <ng-container *ngFor="let validation of validation_messages.balance">
               <mat-error
@@ -36,7 +39,27 @@
 
           <div class="form-group">
             <mat-form-field class="input-style">
-              <input matInput placeholder="color" class="form-control" formControlName="color">
+              <mat-select matInput placeholder="Color" formControlName="color">
+                <mat-option value="primary">Primary</mat-option>
+                <mat-option value="accent">Accent</mat-option>
+                <mat-option value="warn">Warn</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.color">
+              <mat-error
+                *ngIf="accountForm.get('color').hasError(validation.type) && (accountForm.get('color').dirty || accountForm.get('color').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <mat-label><i [ngClass]="accountForm.get('icon').value"></i>Icon</mat-label>
+              <mat-select matInput placeholder="Color" formControlName="icon">
+                <mat-select-trigger>
+                  <fa name="user"></fa>
+                </mat-select-trigger>
+                <mat-option value="user"><fa name="user"></fa></mat-option>
+              </mat-select>
             </mat-form-field>
             <ng-container *ngFor="let validation of validation_messages.color">
               <mat-error

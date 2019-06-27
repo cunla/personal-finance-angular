@@ -39,7 +39,8 @@ export class NewAccountComponent implements OnInit {
     this.accountForm = this.fb.group({
       name: ['', Validators.required],
       balance: ['', Validators.required],
-      color: ['', Validators.required]
+      color: ['', Validators.required],
+      icon: ['fas fa-user', Validators.required],
     });
   }
 
@@ -48,6 +49,7 @@ export class NewAccountComponent implements OnInit {
       name: new FormControl('', Validators.required),
       surname: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required),
+      icon: new FormControl('', Validators.required),
     });
   }
 

@@ -2,6 +2,19 @@
 
   padding: 20px 60px;
 
+  .example-right-align {
+    text-align: right;
+  }
+
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+
   .page-content {
     background-color: #FFF;
 
@@ -24,7 +37,7 @@
         width: 100%;
       }
 
-      .input-style{
+      .input-style {
         width: 100%;
       }
 
