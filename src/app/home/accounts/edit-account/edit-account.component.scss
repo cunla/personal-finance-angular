@@ -20,20 +20,11 @@
     .edit-form {
       padding: 20px;
 
-
-      .submit-button-container {
-        justify-content: flex-end;
-
-        .submit-button{
-          width: 100%;
-        }
-
-        .delete-button{
-          width: 100%;
-        }
+      button {
+        width: 100%;
       }
 
-      .input-style{
+      .input-style {
         width: 100%;
       }
 

@@ -18,7 +18,8 @@
               <input matInput placeholder="Name" class="form-control" formControlName="name">
             </mat-form-field>
             <ng-container *ngFor="let validation of validation_messages.name">
-              <mat-error *ngIf="exampleForm.get('name').hasError(validation.type) && (exampleForm.get('name').dirty || exampleForm.get('name').touched)">{{validation.message}}</mat-error>
+              <mat-error
+                *ngIf="exampleForm.get('name').hasError(validation.type) && (exampleForm.get('name').dirty || exampleForm.get('name').touched)">{{validation.message}}</mat-error>
             </ng-container>
           </div>
 
@@ -27,7 +28,8 @@
               <input matInput type="number" placeholder="Balance" class="form-control" formControlName="balance">
             </mat-form-field>
             <ng-container *ngFor="let validation of validation_messages.balance">
-              <mat-error *ngIf="exampleForm.get('balance').hasError(validation.type) && (exampleForm.get('balance').dirty || exampleForm.get('balance').touched)">{{validation.message}}</mat-error>
+              <mat-error
+                *ngIf="exampleForm.get('balance').hasError(validation.type) && (exampleForm.get('balance').dirty || exampleForm.get('balance').touched)">{{validation.message}}</mat-error>
             </ng-container>
           </div>
 
@@ -36,19 +38,20 @@
               <input matInput placeholder="color" class="form-control" formControlName="color">
             </mat-form-field>
             <ng-container *ngFor="let validation of validation_messages.color">
-              <mat-error *ngIf="exampleForm.get('color').hasError(validation.type) && (exampleForm.get('color').dirty || exampleForm.get('color').touched)">{{validation.message}}</mat-error>
+              <mat-error
+                *ngIf="exampleForm.get('color').hasError(validation.type) && (exampleForm.get('color').dirty || exampleForm.get('color').touched)">{{validation.message}}</mat-error>
             </ng-container>
           </div>
 
-          <div class="row submit-button-container">
+          <div class="row">
             <div class="col-md-4">
-              <button mat-raised-button class="submit-button" type="button" (click)="navigateBack()">Cancel</button>
+              <button mat-raised-button type="button" (click)="navigateBack()">Cancel</button>
             </div>
             <div class="col-md-4">
-              <button mat-raised-button class="submit-button" color="primary" type="submit" [disabled]="!exampleForm.valid">Save</button>
+              <button mat-raised-button color="primary" type="submit" [disabled]="!exampleForm.valid">Save</button>
             </div>
             <div class="col-md-4">
-              <button mat-raised-button class="delete-button" color="warn" type="button" (click)="delete()">Delete</button>
+              <button mat-raised-button color="warn" type="button" (click)="delete()">Delete</button>
             </div>
           </div>
         </form>
