@@ -6,11 +6,11 @@ import {RouterModule} from '@angular/router';
 import {rootRouterConfig} from './app.routes';
 
 import {AppComponent} from './app.component';
-import {AvatarDialogComponent} from './avatar-dialog/avatar-dialog.component';
-import {EditUserComponent} from './edit-user/edit-user.component';
-import {EditUserResolver} from './edit-user/edit-user.resolver';
-import {NewUserComponent} from './new-user/new-user.component';
-import {HomeComponent} from './home/home.component';
+import {AvatarDialogComponent} from './home/accounts/avatar-dialog/avatar-dialog.component';
+import {EditAccountComponent} from './home/accounts/edit-account/edit-account.component';
+import {EditUserResolver} from './home/accounts/edit-account/edit-user.resolver';
+import {NewAccountComponent} from './home/accounts/new-account/new-account.component';
+import {AccountsListComponent} from './home/accounts/list/accounts-list.component';
 
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
@@ -21,30 +21,22 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatDialogModule, MatInputModule, MatSliderModule} from '@angular/material';
 import {AuthModule} from "./auth/auth.module";
 import {AngularFontAwesomeModule} from "angular-font-awesome";
+import {HomeModule} from "./home/home.module";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AvatarDialogComponent,
-    EditUserComponent,
-    NewUserComponent,
-    HomeComponent
   ],
   entryComponents: [AvatarDialogComponent],
   imports: [
+    HomeModule,
     AuthModule,
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
     RouterModule.forRoot(rootRouterConfig, {useHash: false}),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatInputModule,
-    MatSliderModule,
-    MatDialogModule,
     AngularFontAwesomeModule,
   ],
   providers: [FirebaseService, EditUserResolver],

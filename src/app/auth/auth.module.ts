@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {AuthService} from "./auth.service";
-import {UserService} from "./user.service";
 import {AuthGuard} from "./auth.guard";
 import {RouterModule, Routes} from "@angular/router";
 import {AngularFireModule} from "@angular/fire";
@@ -31,7 +30,7 @@ const routes: Routes = [
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     ReactiveFormsModule,
   ],
-  providers: [AuthService, UserService, AuthGuard],
+  providers: [AuthService, AuthGuard],
 })
 export class AuthModule {
 }

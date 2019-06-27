@@ -3,15 +3,15 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { AvatarDialogComponent } from "../avatar-dialog/avatar-dialog.component";
-import { FirebaseService } from '../services/firebase.service';
+import { FirebaseService } from '../../../services/firebase.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-user',
-  templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.scss']
+  templateUrl: './edit-account.component.html',
+  styleUrls: ['./edit-account.component.scss']
 })
-export class EditUserComponent implements OnInit {
+export class EditAccountComponent implements OnInit {
 
   exampleForm: FormGroup;
   item: any;

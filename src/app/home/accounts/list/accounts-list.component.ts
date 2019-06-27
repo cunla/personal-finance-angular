@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../services/firebase.service';
+import { FirebaseService } from '../../../services/firebase.service';
 import { Router, Params } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-accounts',
+  templateUrl: './accounts-list.component.html',
+  styleUrls: ['./accounts-list.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class AccountsListComponent implements OnInit {
 
   ageValue: number = 0;
   searchValue: string = "";
