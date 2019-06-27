@@ -3,8 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 import {AvatarDialogComponent} from "../avatar-dialog/avatar-dialog.component";
 import {Router} from '@angular/router';
-import {FirebaseService} from "../../../services/firebase.service";
-
+import {AccountsService} from "../accounts.service";
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-account.component.html',
@@ -30,7 +29,7 @@ export class NewAccountComponent implements OnInit {
   constructor(private fb: FormBuilder,
               public dialog: MatDialog,
               private router: Router,
-              public firebaseService: FirebaseService) {
+              public accountsService: AccountsService) {
   }
 
   ngOnInit() {
@@ -68,7 +67,7 @@ export class NewAccountComponent implements OnInit {
   }
 
   onSubmit(value) {
-    this.firebaseService.createUser(value, this.avatarLink)
+    this.accountsService.createAccount(value, this.avatarLink)
       .then(
         res => {
           this.resetFields();

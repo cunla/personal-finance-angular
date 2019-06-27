@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { AvatarDialogComponent } from "../avatar-dialog/avatar-dialog.component";
-import { FirebaseService } from '../../../services/firebase.service';
 import { Router } from '@angular/router';
+import {AccountsService} from "../accounts.service";
 
 @Component({
   selector: 'app-edit-user',
@@ -29,7 +29,7 @@ export class EditAccountComponent implements OnInit {
  };
 
   constructor(
-    public firebaseService: FirebaseService,
+    public accountsService: AccountsService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
@@ -71,7 +71,7 @@ export class EditAccountComponent implements OnInit {
   onSubmit(value){
     value.avatar = this.item.avatar;
     value.age = Number(value.age);
-    this.firebaseService.updateUser(this.item.id, value)
+    this.accountsService.updateAccount(this.item.id, value)
     .then(
       res => {
         this.router.navigate(['/home']);
@@ -80,7 +80,7 @@ export class EditAccountComponent implements OnInit {
   }
 
   delete(){
-    this.firebaseService.deleteUser(this.item.id)
+    this.accountsService.deleteAccount(this.item.id)
     .then(
       res => {
         this.router.navigate(['/home']);

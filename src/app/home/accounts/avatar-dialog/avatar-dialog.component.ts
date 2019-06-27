@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../../services/firebase.service';
 import { MatDialogRef } from '@angular/material';
+import {AccountsService} from "../accounts.service";
 
 @Component({
   selector: 'app-avatar-dialog',
@@ -13,7 +13,7 @@ export class AvatarDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AvatarDialogComponent>,
-    public firebaseService: FirebaseService
+    public accountsService: AccountsService
   ) { }
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class AvatarDialogComponent implements OnInit {
   }
 
   getData(){
-    this.firebaseService.getAvatars()
+    this.accountsService.getAvatars()
     .subscribe(data => this.avatars = data);
   }
 

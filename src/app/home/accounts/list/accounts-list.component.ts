@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../../services/firebase.service';
-import { Router, Params } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AccountsService} from "../accounts.service";
 
 @Component({
   selector: 'app-accounts',
@@ -16,54 +16,47 @@ export class AccountsListComponent implements OnInit {
   name_filtered_items: Array<any>;
 
   constructor(
-    public firebaseService: FirebaseService,
+    public accountsService: AccountsService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.getData();
   }
 
-  getData(){
-    this.firebaseService.getUsers()
-    .subscribe(result => {
-      this.items = result;
-      this.age_filtered_items = result;
-      this.name_filtered_items = result;
-    })
+  getData() {
+    this.accountsService.getAccounts()
+      .subscribe(result => {
+        this.items = result;
+        this.age_filtered_items = result;
+        this.name_filtered_items = result;
+      })
   }
 
-  viewDetails(item){
-    this.router.navigate(['/details/'+ item.payload.doc.id]);
+  viewDetails(item) {
+    this.router.navigate(['/details/' + item.payload.doc.id]).then();
   }
 
-  capitalizeFirstLetter(value){
+  capitalizeFirstLetter(value) {
     return value.charAt(0).toUpperCase() + value.slice(1);
   }
 
-  searchByName(){
+  searchByName() {
     let value = this.searchValue.toLowerCase();
-    this.firebaseService.searchUsers(value)
-    .subscribe(result => {
-      this.name_filtered_items = result;
-      this.items = this.combineLists(result, this.age_filtered_items);
-    })
+    this.accountsService.searchAccounts(value)
+      .subscribe(result => {
+        this.name_filtered_items = result;
+        this.items = this.combineLists(result, this.age_filtered_items);
+      })
   }
 
-  rangeChange(event){
-    this.firebaseService.searchUsersByAge(event.value)
-    .subscribe(result =>{
-      this.age_filtered_items = result;
-      this.items = this.combineLists(result, this.name_filtered_items);
-    })
-  }
-
-  combineLists(a, b){
+  combineLists(a, b) {
     let result = [];
 
     a.filter(x => {
-      return b.filter(x2 =>{
-        if(x2.payload.doc.id == x.payload.doc.id){
+      return b.filter(x2 => {
+        if (x2.payload.doc.id == x.payload.doc.id) {
           result.push(x2);
         }
       });
