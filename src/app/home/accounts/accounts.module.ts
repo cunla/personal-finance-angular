@@ -5,7 +5,6 @@ import {NewAccountComponent} from "./new-account/new-account.component";
 import {EditAccountComponent} from "./edit-account/edit-account.component";
 import {RouterModule, Routes} from "@angular/router";
 import {EditAccountResolver} from "./edit-account/edit-account-resolver.service";
-import {AvatarDialogComponent} from "./avatar-dialog/avatar-dialog.component";
 import {AngularFontAwesomeModule} from "angular-font-awesome";
 import {MatButtonModule, MatDialogModule, MatInputModule, MatSliderModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -23,7 +22,6 @@ const routes: Routes = [
     AccountsListComponent,
     NewAccountComponent,
     EditAccountComponent,
-    AvatarDialogComponent,
   ],
   imports: [
     CommonModule,

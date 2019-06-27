@@ -3,6 +3,21 @@ import {AngularFirestore} from '@angular/fire/firestore';
 
 export const ACCOUNTS_COLLECTION = 'accounts';
 
+export interface Account {
+  id: number;
+  name: string;
+  balance: number;
+  color: string;
+  icon: string;
+  last_validated: Date;
+  currency: string;
+  currency_icon: string;
+  number_of_transactions: number;
+  is_default: boolean;
+  starting_balance: number;
+  updated: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -41,13 +56,7 @@ export class AccountsService {
   }
 
 
-  createAccount(value, avatar) {
-    return this.db.collection(ACCOUNTS_COLLECTION).add({
-      name: value.name,
-      nameToSearch: value.name.toLowerCase(),
-      surname: value.surname,
-      age: parseInt(value.age),
-      avatar: avatar
-    });
+  createAccount(account: Account) {
+    return this.db.collection(ACCOUNTS_COLLECTION).add(account);
   }
 }

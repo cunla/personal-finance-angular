@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
-import {AvatarDialogComponent} from "../avatar-dialog/avatar-dialog.component";
 import {Router} from '@angular/router';
 import {AccountsService} from "../accounts.service";
+
 @Component({
   selector: 'app-new-user',
   templateUrl: './new-account.component.html',
@@ -11,18 +11,17 @@ import {AccountsService} from "../accounts.service";
 })
 export class NewAccountComponent implements OnInit {
 
-  exampleForm: FormGroup;
-  avatarLink: string = "https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg";
+  accountForm: FormGroup;
 
   validation_messages = {
     'name': [
       {type: 'required', message: 'Name is required.'}
     ],
-    'surname': [
-      {type: 'required', message: 'Surname is required.'}
+    'balance': [
+      {type: 'required', message: 'Starting balance is required.'}
     ],
-    'age': [
-      {type: 'required', message: 'Age is required.'},
+    'color': [
+      {type: 'required', message: 'Picking color is required.'},
     ]
   };
 
@@ -37,29 +36,15 @@ export class NewAccountComponent implements OnInit {
   }
 
   createForm() {
-    this.exampleForm = this.fb.group({
+    this.accountForm = this.fb.group({
       name: ['', Validators.required],
-      surname: ['', Validators.required],
-      age: ['', Validators.required]
-    });
-  }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(AvatarDialogComponent, {
-      height: '400px',
-      width: '400px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.avatarLink = result.link;
-      }
+      balance: ['', Validators.required],
+      color: ['', Validators.required]
     });
   }
 
   resetFields() {
-    this.avatarLink = "https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg";
-    this.exampleForm = this.fb.group({
+    this.accountForm = this.fb.group({
       name: new FormControl('', Validators.required),
       surname: new FormControl('', Validators.required),
       age: new FormControl('', Validators.required),
@@ -67,13 +52,12 @@ export class NewAccountComponent implements OnInit {
   }
 
   onSubmit(value) {
-    this.accountsService.createAccount(value, this.avatarLink)
-      .then(
-        res => {
-          this.resetFields();
-          this.router.navigate(['/home']);
-        }
-      )
+    this.accountsService.createAccount(value).then(
+      res => {
+        this.resetFields();
+        this.router.navigate(['..']).then();
+      }
+    )
   }
 
 }

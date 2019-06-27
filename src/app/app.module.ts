@@ -3,7 +3,6 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {rootRouterConfig} from './app.routes';
 import {AppComponent} from './app.component';
-import {AvatarDialogComponent} from './home/accounts/avatar-dialog/avatar-dialog.component';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {environment} from '../environments/environment';
@@ -17,14 +16,13 @@ import {HomeModule} from "./home/home.module";
   declarations: [
     AppComponent,
   ],
-  entryComponents: [AvatarDialogComponent],
   imports: [
     HomeModule,
     AuthModule,
     BrowserModule,
     RouterModule.forRoot(rootRouterConfig, {useHash: false}),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     BrowserAnimationsModule,
     AngularFontAwesomeModule,
   ],

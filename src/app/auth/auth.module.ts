@@ -7,7 +7,6 @@ import {AuthGuard} from "./auth.guard";
 import {RouterModule, Routes} from "@angular/router";
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../../environments/environment";
-import {AngularFirestoreModule} from "@angular/fire/firestore";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import {ReactiveFormsModule} from "@angular/forms";
 
@@ -26,7 +25,6 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     ReactiveFormsModule,
   ],

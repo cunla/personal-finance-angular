@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { MatDialog } from '@angular/material';
-import { AvatarDialogComponent } from "../avatar-dialog/avatar-dialog.component";
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatDialog} from '@angular/material';
 import {AccountsService} from "../accounts.service";
 
 @Component({
@@ -17,24 +15,23 @@ export class EditAccountComponent implements OnInit {
   item: any;
 
   validation_messages = {
-   'name': [
-     { type: 'required', message: 'Name is required.' }
-   ],
-   'surname': [
-     { type: 'required', message: 'Surname is required.' }
-   ],
-   'age': [
-     { type: 'required', message: 'Age is required.' },
-   ]
- };
+    'name': [
+      {type: 'required', message: 'Name is required.'}
+    ],
+    'balance': [
+      {type: 'required', message: 'Starting balance is required.'}
+    ],
+    'color': [
+      {type: 'required', message: 'Picking color is required.'},
+    ]
+  };
 
-  constructor(
-    public accountsService: AccountsService,
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private router: Router,
-    public dialog: MatDialog
-  ) { }
+  constructor(public accountsService: AccountsService,
+              private route: ActivatedRoute,
+              private fb: FormBuilder,
+              private router: Router,
+              public dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.route.data.subscribe(routeData => {
@@ -50,48 +47,35 @@ export class EditAccountComponent implements OnInit {
   createForm() {
     this.exampleForm = this.fb.group({
       name: [this.item.name, Validators.required],
-      surname: [this.item.surname, Validators.required],
-      age: [this.item.age, Validators.required]
+      balance: [this.item.balance, Validators.required],
+      color: [this.item.color, Validators.required]
     });
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(AvatarDialogComponent, {
-      height: '400px',
-      width: '400px'
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result){
-        this.item.avatar = result.link;
-      }
-    });
-  }
-
-  onSubmit(value){
+  onSubmit(value) {
     value.avatar = this.item.avatar;
     value.age = Number(value.age);
     this.accountsService.updateAccount(this.item.id, value)
-    .then(
-      res => {
-        this.router.navigate(['/home']);
-      }
-    )
+      .then(
+        res => {
+          this.navigateBack();
+        }
+      )
   }
 
-  delete(){
+  delete() {
     this.accountsService.deleteAccount(this.item.id)
-    .then(
-      res => {
-        this.router.navigate(['/home']);
-      },
-      err => {
-        console.log(err);
-      }
-    )
+      .then(
+        res => {
+          this.navigateBack();
+        },
+        err => {
+          console.log(err);
+        }
+      )
   }
 
-  cancel(){
+  navigateBack() {
     this.router.navigate(['/home']);
   }
 
