@@ -1,7 +1,7 @@
 <div class="create-page">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page">Create Account</li>
+      <li aria-current="page" class="breadcrumb-item active">Create Account</li>
     </ol>
   </nav>
   <div class="page-content">
@@ -12,11 +12,11 @@
 
       <div class="col col-md-8">
 
-        <form class="create-form" [formGroup]="accountForm" novalidate (ngSubmit)="onSubmit(accountForm.value)">
+        <form (ngSubmit)="onSubmit(accountForm.value)" [formGroup]="accountForm" class="create-form" novalidate>
 
           <div class="form-group">
             <mat-form-field class="input-style">
-              <input matInput placeholder="Name" class="form-control" formControlName="name">
+              <input class="form-control" formControlName="name" matInput placeholder="Name">
             </mat-form-field>
             <ng-container *ngFor="let validation of validation_messages.name">
               <mat-error
@@ -26,8 +26,8 @@
 
           <div class="form-group">
             <mat-form-field class="input-style">
-              <input matInput placeholder="Opening balance" type="number" class="form-control"
-                     formControlName="balance">
+              <input class="form-control" formControlName="balance" matInput placeholder="Opening balance"
+                     type="number">
               <span matPrefix>$&nbsp;</span>
               <span matSuffix>.00</span>
             </mat-form-field>
@@ -39,7 +39,7 @@
 
           <div class="form-group">
             <mat-form-field class="input-style">
-              <mat-select matInput placeholder="Color" formControlName="color">
+              <mat-select formControlName="color" matInput placeholder="Color">
                 <mat-option value="primary">Primary</mat-option>
                 <mat-option value="accent">Accent</mat-option>
                 <mat-option value="warn">Warn</mat-option>
@@ -51,14 +51,14 @@
             </ng-container>
           </div>
 
-          <app-icon-picker name="Icon" [options]="accountIconOptions"
-                           [formGroup]="accountForm" controlName="icon"
-                           [validationMessages]="validation_messages.icon">
+          <app-icon-picker [formGroup]="accountForm" [options]="accountIconOptions"
+                           [validationMessages]="validation_messages.icon" controlName="icon"
+                           name="Icon">
           </app-icon-picker>
 
           <div class="row">
             <div class="offset-md-8 col-md-4">
-              <button mat-raised-button color="primary" type="submit" [disabled]="!accountForm.valid">
+              <button [disabled]="!accountForm.valid" color="primary" mat-raised-button type="submit">
                 Create
               </button>
             </div>

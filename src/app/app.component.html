@@ -3,13 +3,13 @@
     <ul class="nav flex-column">
       <li class="nav-item">
         <a class="nav-link active" routerLink="home/accounts">
-          <fa name="home"></fa>
+          <fa-icon icon="home"></fa-icon>
         </a>
       </li>
     </ul>
     <ul class="nav flex-column">
-      <li class="nav-item nav-link" (click)="logout()">
-          <fa name="sign-out"></fa>
+      <li (click)="logout()" class="nav-item nav-link">
+        <fa-icon icon="sign-out-alt"></fa-icon>
       </li>
     </ul>
   </div>

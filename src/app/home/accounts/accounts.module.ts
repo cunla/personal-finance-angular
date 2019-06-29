@@ -5,11 +5,11 @@ import {NewAccountComponent} from "./new-account/new-account.component";
 import {EditAccountComponent} from "./edit-account/edit-account.component";
 import {RouterModule, Routes} from "@angular/router";
 import {EditAccountResolver} from "./edit-account/edit-account-resolver.service";
-import {AngularFontAwesomeModule} from "angular-font-awesome";
 import {MatButtonModule, MatDialogModule, MatInputModule, MatSelectModule, MatSliderModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AccountsService} from "./accounts.service";
 import {ComponentsModule} from "../components/components.module";
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   {path: '', redirectTo: 'list', pathMatch: 'full'},
@@ -29,7 +29,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ComponentsModule,
-    AngularFontAwesomeModule,
+    FontAwesomeModule,
     MatButtonModule,
     MatInputModule,
     MatSliderModule,

@@ -8,8 +8,10 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {environment} from '../environments/environment';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthModule} from "./auth/auth.module";
-import {AngularFontAwesomeModule} from "angular-font-awesome";
-import {HomeModule} from "./home/home.module";
+import {HomeModule} from './home/home.module';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 
 @NgModule({
@@ -24,7 +26,7 @@ import {HomeModule} from "./home/home.module";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
     BrowserAnimationsModule,
-    AngularFontAwesomeModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
@@ -33,4 +35,8 @@ import {HomeModule} from "./home/home.module";
   ]
 })
 export class AppModule {
+  constructor() {
+    // Add an icon to the library for convenient access in other components
+    library.add(fas);
+  }
 }

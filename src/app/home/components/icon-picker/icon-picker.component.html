@@ -1,15 +1,18 @@
-<div class="form-group" [formGroup]="group">
+<div [formGroup]="group" class="form-group">
   <mat-form-field class="input-style">
     <mat-label><i [ngClass]="group.get(controlName).value"></i>{{name}}</mat-label>
-    <mat-select matInput [placeholder]="name"  [formControlName]="controlName">
+    <mat-select [formControlName]="controlName" [placeholder]="name" matInput>
       <mat-select-trigger>
-        <fa [name]="group.get(controlName).value"></fa>
+        <fa-icon [icon]="group.get(controlName).value"></fa-icon>
       </mat-select-trigger>
-      <mat-option *ngFor="let item of options" [value]="item.value"><fa [name]="item.icon"></fa>{{item.name}}</mat-option>
+      <mat-option *ngFor="let item of options" [value]="item.value">
+        <fa-icon [icon]="item.icon"></fa-icon>
+        {{item.name}}</mat-option>
     </mat-select>
   </mat-form-field>
   <ng-container *ngFor="let validation of validationMessages">
-    <mat-error
-      *ngIf="group.get(controlName).hasError(validation.type) && (group.get(controlName).dirty || group.get(controlName).touched)">{{validation.message}}</mat-error>
+    <mat-error *ngIf="group.get(controlName).hasError(validation.type) && (group.get(controlName).dirty || group.get(controlName).touched)">
+      {{validation.message}}
+    </mat-error>
   </ng-container>
 </div>

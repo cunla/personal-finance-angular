@@ -31,7 +31,7 @@ export class AccountsListComponent implements OnInit {
         this.items = result;
         this.age_filtered_items = result;
         this.name_filtered_items = result;
-      })
+      });
   }
 
   viewDetails(item) {

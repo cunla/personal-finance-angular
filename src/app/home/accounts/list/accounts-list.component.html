@@ -1,16 +1,17 @@
 <div class="row">
   <div class="col-md-3 offset-md-1">
     <div class="input-group">
-      <input type="text" class="form-control" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by name..." (keyup)="searchByName()">
+      <input (keyup)="searchByName()" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" class="form-control"
+             placeholder="Search by name..." type="text">
       <div class="input-group-append">
-        <span class="input-group-text"><fa name="search"></fa></span>
+        <span class="input-group-text"><fa-icon icon="search"></fa-icon></span>
       </div>
     </div>
   </div>
 
   <div class="offset-md-6 col-md-1">
     <a class="nav-link" routerLink="../new-account">
-      <fa name="plus-square"></fa>
+      <fa-icon icon="plus-square"></fa-icon>
     </a>
 
   </div>
@@ -27,8 +28,8 @@
         <p>Balance: {{item.payload.doc.data().balance}}</p>
       </div>
       <div class="col col-md-2 actions-col">
-        <button class="btn btn-outline-primary action" (click)="viewDetails(item)" type="button">
-          <fa name="arrow-circle-right"></fa>
+        <button (click)="viewDetails(item)" class="btn btn-outline-primary action" type="button">
+          <fa-icon icon="arrow-circle-right"></fa-icon>
         </button>
       </div>
     </div>

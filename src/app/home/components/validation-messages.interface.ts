@@ -4,7 +4,7 @@ export interface ValidationMessageInterface {
 }
 
 export interface OptionInterface {
-  value: string;
-  icon: string;
+  value: string[];
+  icon: string[];
   name: string;
 }

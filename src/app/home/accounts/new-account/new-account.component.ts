@@ -2,15 +2,15 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 import {Router} from '@angular/router';
-import {AccountsService} from "../accounts.service";
-import {OptionInterface} from "../../components/validation-messages.interface";
+import {AccountsService} from '../accounts.service';
+import {OptionInterface} from '../../components/validation-messages.interface';
 
 export const ACCOUNT_ICON_OPTIONS: OptionInterface[] = [
-  {icon: 'credit-card', name: '', value: 'credit-card'},
-  {icon: 'cc-visa', name: '', value: 'cc-visa'},
-  {icon: 'cc-mastercard', name: '', value: 'cc-mastercard'},
-  {icon: 'money-bill-wave-alt', name: '', value: 'money-bill-wave-alt'},
-  {icon: 'wallet', name: '', value: 'wallet'},
+  {icon: ['fas', 'credit-card'], name: '', value: ['fas', 'credit-card']},
+  {icon: ['fab', 'cc-visa'], name: '', value: ['fab', 'cc-visa']},
+  {icon: ['fab', 'cc-mastercard'], name: '', value: ['fab', 'cc-mastercard']},
+  {icon: ['fas', 'money-bill-wave-alt'], name: '', value: ['fas', 'money-bill-wave-alt']},
+  {icon: ['fas', 'wallet'], name: '', value: ['fas', 'wallet']},
 ];
 
 @Component({
@@ -51,7 +51,7 @@ export class NewAccountComponent implements OnInit {
       name: ['', Validators.required],
       balance: ['', Validators.required],
       color: ['', Validators.required],
-      icon: ['fas fa-user', Validators.required],
+      icon: [['fas', 'users'], Validators.required],
     });
   }
 
@@ -70,7 +70,7 @@ export class NewAccountComponent implements OnInit {
         this.resetFields();
         this.router.navigate(['..']).then();
       }
-    )
+    );
   }
 
 }
