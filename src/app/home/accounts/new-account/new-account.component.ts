@@ -6,11 +6,13 @@ import {AccountsService} from '../accounts.service';
 import {OptionInterface} from '../../components/validation-messages.interface';
 
 export const ACCOUNT_ICON_OPTIONS: OptionInterface[] = [
-  {icon: ['fas', 'credit-card'], name: '', value: ['fas', 'credit-card']},
-  {icon: ['fab', 'cc-visa'], name: '', value: ['fab', 'cc-visa']},
-  {icon: ['fab', 'cc-mastercard'], name: '', value: ['fab', 'cc-mastercard']},
-  {icon: ['fas', 'money-bill-wave-alt'], name: '', value: ['fas', 'money-bill-wave-alt']},
-  {icon: ['fas', 'wallet'], name: '', value: ['fas', 'wallet']},
+  {icon: ['fas', 'credit-card'], name: 'Credit card', value: ['fas', 'credit-card']},
+  {icon: ['fab', 'cc-visa'], name: 'VISA', value: ['fab', 'cc-visa']},
+  {icon: ['fab', 'cc-mastercard'], name: 'MasterCard', value: ['fab', 'cc-mastercard']},
+  {icon: ['fas', 'money-bill-wave-alt'], name: 'Cash', value: ['fas', 'money-bill-wave-alt']},
+  {icon: ['fas', 'wallet'], name: 'Wallet', value: ['fas', 'wallet']},
+  {icon: ['fas', 'piggy-bank'], name: 'Piggy bank', value: ['fas', 'piggy-bank']},
+  {icon: ['fas', 'university'], name: 'Bank', value: ['fas', 'university']},
 ];
 
 @Component({
@@ -27,14 +29,9 @@ export class NewAccountComponent implements OnInit {
     'balance': [
       {type: 'required', message: 'Starting balance is required.'}
     ],
-    'color': [
-      {type: 'required', message: 'Picking color is required.'},
-    ],
-    'icon': [
-      {type: 'required', message: 'Picking color is required.'},
-    ]
   };
   accountIconOptions = ACCOUNT_ICON_OPTIONS;
+  color: string;
 
   constructor(private fb: FormBuilder,
               public dialog: MatDialog,

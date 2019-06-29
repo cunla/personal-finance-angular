@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AccountsService} from "./accounts.service";
 import {ComponentsModule} from "../components/components.module";
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {ColorPickerModule} from "ngx-color-picker";
 
 const routes: Routes = [
   {path: '', redirectTo: 'list', pathMatch: 'full'},

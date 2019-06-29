@@ -1,18 +1,27 @@
-<div [formGroup]="group" class="form-group">
-  <mat-form-field class="input-style">
+<span [formGroup]="group">
+  <mat-form-field>
     <mat-label><i [ngClass]="group.get(controlName).value"></i>{{name}}</mat-label>
+    <input [(colorPicker)]="color"
+           [cpPosition]="'right'"
+           [cpAlphaChannel]="'disabled'"
+           (colorPickerSelect)="updateColor(color)"
+           cpOutputFormat="hex"
+           cpOKButton="true"
+           cpCancelButton="true"
+           matInput/>
     <mat-select [formControlName]="controlName" [placeholder]="name" matInput>
       <mat-select-trigger>
-        <fa-icon [icon]="group.get(controlName).value"></fa-icon>
+        <fa-icon [icon]="group.get(controlName).value"
+                 [styles]="{'color': group.get(colorControlName).value}">
+        </fa-icon>
       </mat-select-trigger>
       <mat-option *ngFor="let item of options" [value]="item.value">
-        <fa-icon [icon]="item.icon"></fa-icon>
-        {{item.name}}</mat-option>
+        <fa-icon [icon]="item.icon"
+                 [styles]="{'color': group.get(colorControlName).value}">
+        </fa-icon>
+        &nbsp;{{item.name}}
+      </mat-option>
     </mat-select>
+    <mat-hint>Pick icon and color</mat-hint>
   </mat-form-field>
-  <ng-container *ngFor="let validation of validationMessages">
-    <mat-error *ngIf="group.get(controlName).hasError(validation.type) && (group.get(controlName).dirty || group.get(controlName).touched)">
-      {{validation.message}}
-    </mat-error>
-  </ng-container>
-</div>
+</span>

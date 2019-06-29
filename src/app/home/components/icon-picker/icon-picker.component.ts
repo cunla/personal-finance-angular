@@ -1,18 +1,19 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
-import {OptionInterface, ValidationMessageInterface} from "../validation-messages.interface";
+import {OptionInterface} from "../validation-messages.interface";
 
 @Component({
   selector: 'app-icon-picker',
   templateUrl: './icon-picker.component.html',
-  styleUrls: ['./icon-picker.component.css']
+  styleUrls: ['./icon-picker.component.scss']
 })
 export class IconPickerComponent implements OnInit {
-  @Input('name') name: string;
+  @Input() name: string;
   @Input('formGroup') group: FormGroup;
-  @Input('validationMessages') validationMessages: ValidationMessageInterface[];
   @Input('controlName') controlName: string;
+  @Input('colorControlName') colorControlName: string;
   @Input('options') options: OptionInterface[];
+  color = '#000';
 
   constructor() {
   }
@@ -21,4 +22,7 @@ export class IconPickerComponent implements OnInit {
 
   }
 
+  updateColor(color: string) {
+    this.group.get(this.colorControlName).setValue(color);
+  }
 }
