@@ -3,15 +3,16 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 import {AccountsService} from "../accounts.service";
+import {ACCOUNT_ICON_OPTIONS} from "../constants";
 
 @Component({
   selector: 'app-edit-user',
-  templateUrl: './edit-account.component.html',
-  styleUrls: ['./edit-account.component.scss']
+  templateUrl: './account-details.component.html',
+  styleUrls: ['./account-details.component.scss']
 })
-export class EditAccountComponent implements OnInit {
-
-  exampleForm: FormGroup;
+export class AccountDetailsComponent implements OnInit {
+  accountIconOptions = ACCOUNT_ICON_OPTIONS;
+  accountForm: FormGroup;
   item: any;
 
   validation_messages = {
@@ -20,9 +21,6 @@ export class EditAccountComponent implements OnInit {
     ],
     'balance': [
       {type: 'required', message: 'Starting balance is required.'}
-    ],
-    'color': [
-      {type: 'required', message: 'Picking color is required.'},
     ]
   };
 
@@ -35,48 +33,45 @@ export class EditAccountComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(routeData => {
-      let data = routeData['data'];
+      const data = routeData['data'];
       if (data) {
         this.item = data.payload.data();
+        console.log(this.item);
         this.item.id = data.payload.id;
         this.createForm();
       }
-    })
+    });
   }
 
   createForm() {
-    this.exampleForm = this.fb.group({
+    this.accountForm = this.fb.group({
       name: [this.item.name, Validators.required],
       balance: [this.item.balance, Validators.required],
-      color: [this.item.color, Validators.required]
+      color: [this.item.color, Validators.required],
+      icon: [this.item.icon, Validators.required],
     });
   }
 
   onSubmit(value) {
-    value.avatar = this.item.avatar;
-    value.age = Number(value.age);
     this.accountsService.updateAccount(this.item.id, value)
       .then(
         res => {
           this.navigateBack();
         }
-      )
+      );
   }
 
   delete() {
-    this.accountsService.deleteAccount(this.item.id)
-      .then(
-        res => {
-          this.navigateBack();
-        },
-        err => {
-          console.log(err);
-        }
-      )
+    this.accountsService.deleteAccount(this.item.id).then(
+      res => {
+        this.navigateBack();
+      }, err => {
+        console.log(err);
+      });
   }
 
   navigateBack() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/home']).then();
   }
 
 }

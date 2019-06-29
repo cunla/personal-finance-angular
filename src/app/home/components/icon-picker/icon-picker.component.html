@@ -8,8 +8,9 @@
            cpOutputFormat="hex"
            cpOKButton="true"
            cpCancelButton="true"
-           matInput/>
-    <mat-select [formControlName]="controlName" [placeholder]="name" matInput>
+           matInput
+           />
+    <mat-select [formControlName]="controlName" [placeholder]="name">
       <mat-select-trigger>
         <fa-icon [icon]="group.get(controlName).value"
                  [styles]="{'color': group.get(colorControlName).value}">

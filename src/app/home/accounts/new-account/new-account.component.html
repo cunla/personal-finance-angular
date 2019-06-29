@@ -35,9 +35,11 @@
               <input class="form-control" formControlName="balance" matInput placeholder="Opening balance"
                      type="number">
             </mat-form-field>
-            <ng-container *ngFor="let validation of validation_messages.color">
+            <ng-container *ngFor="let validation of validation_messages.balance">
               <mat-error
-                *ngIf="accountForm.get('color').hasError(validation.type) && (accountForm.get('color').dirty || accountForm.get('color').touched)">{{validation.message}}</mat-error>
+                *ngIf="accountForm.get('balance').hasError(validation.type) && (accountForm.get('balance').dirty || accountForm.get('balance').touched)">
+                {{validation.message}}
+              </mat-error>
             </ng-container>
           </div>
 

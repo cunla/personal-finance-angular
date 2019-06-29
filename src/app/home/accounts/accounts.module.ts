@@ -2,29 +2,27 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AccountsListComponent} from "./list/accounts-list.component";
 import {NewAccountComponent} from "./new-account/new-account.component";
-import {EditAccountComponent} from "./edit-account/edit-account.component";
+import {AccountDetailsComponent} from "./account-details/account-details.component";
 import {RouterModule, Routes} from "@angular/router";
-import {EditAccountResolver} from "./edit-account/edit-account-resolver.service";
-import {MatButtonModule, MatDialogModule, MatInputModule, MatSelectModule, MatSliderModule} from "@angular/material";
+import {EditAccountResolver} from "./account-details/edit-account-resolver.service";
+import {MatButtonModule, MatDialogModule, MatInputModule, MatSliderModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AccountsService} from "./accounts.service";
 import {ComponentsModule} from "../components/components.module";
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {ColorPickerModule} from "ngx-color-picker";
 
 const routes: Routes = [
   {path: '', redirectTo: 'list', pathMatch: 'full'},
   {path: 'list', component: AccountsListComponent},
   {path: 'new-account', component: NewAccountComponent},
-  {path: 'details/:id', component: EditAccountComponent, resolve: {data: EditAccountResolver}}
+  {path: 'details/:id', component: AccountDetailsComponent, resolve: {data: EditAccountResolver}}
 ];
 
 @NgModule({
   declarations: [
     AccountsListComponent,
     NewAccountComponent,
-    EditAccountComponent,
-
+    AccountDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +35,6 @@ const routes: Routes = [
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule,
   ],
   providers: [
     EditAccountResolver,

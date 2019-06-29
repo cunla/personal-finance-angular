@@ -1,17 +1,22 @@
 <div class="edit-page">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li aria-current="page" class="breadcrumb-item active">Edit User</li>
+      <li aria-current="page" class="breadcrumb-item active">Edit Account</li>
     </ol>
   </nav>
   <div class="page-content">
     <div class="row">
-      <div class="col col-md-4">
-
-      </div>
+      <div class="col col-md-4"></div>
       <div class="col col-md-8">
+        <form (ngSubmit)="onSubmit(accountForm.value)"
+              [formGroup]="accountForm" class="edit-form" novalidate>
 
-        <form (ngSubmit)="onSubmit(exampleForm.value)" [formGroup]="exampleForm" class="edit-form" novalidate>
+          <app-icon-picker [formGroup]="accountForm"
+                           [options]="accountIconOptions"
+                           controlName="icon"
+                           colorControlName="color"
+                           name="Icon">
+          </app-icon-picker>
 
           <div class="form-group">
             <mat-form-field class="input-style">
@@ -19,7 +24,7 @@
             </mat-form-field>
             <ng-container *ngFor="let validation of validation_messages.name">
               <mat-error
-                *ngIf="exampleForm.get('name').hasError(validation.type) && (exampleForm.get('name').dirty || exampleForm.get('name').touched)">{{validation.message}}</mat-error>
+                *ngIf="accountForm.get('name').hasError(validation.type) && (accountForm.get('name').dirty || accountForm.get('name').touched)">{{validation.message}}</mat-error>
             </ng-container>
           </div>
 
@@ -29,17 +34,7 @@
             </mat-form-field>
             <ng-container *ngFor="let validation of validation_messages.balance">
               <mat-error
-                *ngIf="exampleForm.get('balance').hasError(validation.type) && (exampleForm.get('balance').dirty || exampleForm.get('balance').touched)">{{validation.message}}</mat-error>
-            </ng-container>
-          </div>
-
-          <div class="form-group">
-            <mat-form-field class="input-style">
-              <input class="form-control" formControlName="color" matInput placeholder="color">
-            </mat-form-field>
-            <ng-container *ngFor="let validation of validation_messages.color">
-              <mat-error
-                *ngIf="exampleForm.get('color').hasError(validation.type) && (exampleForm.get('color').dirty || exampleForm.get('color').touched)">{{validation.message}}</mat-error>
+                *ngIf="accountForm.get('balance').hasError(validation.type) && (accountForm.get('balance').dirty || accountForm.get('balance').touched)">{{validation.message}}</mat-error>
             </ng-container>
           </div>
 
@@ -48,7 +43,7 @@
               <button (click)="navigateBack()" mat-raised-button type="button">Cancel</button>
             </div>
             <div class="col-md-4">
-              <button [disabled]="!exampleForm.valid" color="primary" mat-raised-button type="submit">Save</button>
+              <button [disabled]="!accountForm.valid" color="primary" mat-raised-button type="submit">Save</button>
             </div>
             <div class="col-md-4">
               <button (click)="delete()" color="warn" mat-raised-button type="button">Delete</button>
