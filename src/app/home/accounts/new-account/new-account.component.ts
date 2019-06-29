@@ -3,6 +3,15 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialog} from '@angular/material';
 import {Router} from '@angular/router';
 import {AccountsService} from "../accounts.service";
+import {OptionInterface} from "../../components/validation-messages.interface";
+
+export const ACCOUNT_ICON_OPTIONS: OptionInterface[] = [
+  {icon: 'credit-card', name: '', value: 'credit-card'},
+  {icon: 'cc-visa', name: '', value: 'cc-visa'},
+  {icon: 'cc-mastercard', name: '', value: 'cc-mastercard'},
+  {icon: 'money-bill-wave-alt', name: '', value: 'money-bill-wave-alt'},
+  {icon: 'wallet', name: '', value: 'wallet'},
+];
 
 @Component({
   selector: 'app-new-user',
@@ -10,9 +19,7 @@ import {AccountsService} from "../accounts.service";
   styleUrls: ['./new-account.component.scss']
 })
 export class NewAccountComponent implements OnInit {
-
   accountForm: FormGroup;
-
   validation_messages = {
     'name': [
       {type: 'required', message: 'Name is required.'}
@@ -22,8 +29,12 @@ export class NewAccountComponent implements OnInit {
     ],
     'color': [
       {type: 'required', message: 'Picking color is required.'},
+    ],
+    'icon': [
+      {type: 'required', message: 'Picking color is required.'},
     ]
   };
+  accountIconOptions = ACCOUNT_ICON_OPTIONS;
 
   constructor(private fb: FormBuilder,
               public dialog: MatDialog,

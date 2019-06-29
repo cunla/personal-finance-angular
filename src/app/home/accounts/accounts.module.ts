@@ -9,6 +9,7 @@ import {AngularFontAwesomeModule} from "angular-font-awesome";
 import {MatButtonModule, MatDialogModule, MatInputModule, MatSelectModule, MatSliderModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AccountsService} from "./accounts.service";
+import {ComponentsModule} from "../components/components.module";
 
 const routes: Routes = [
   {path: '', redirectTo: 'list', pathMatch: 'full'},
@@ -27,6 +28,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    ComponentsModule,
     AngularFontAwesomeModule,
     MatButtonModule,
     MatInputModule,
