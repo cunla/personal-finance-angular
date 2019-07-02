@@ -3,7 +3,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 
 export const ACCOUNTS_COLLECTION = 'accounts';
 
-export interface Account {
+export interface AccountInterface {
   id: number;
   name: string;
   balance: number;
@@ -56,7 +56,7 @@ export class AccountsService {
   }
 
 
-  createAccount(account: Account) {
+  createAccount(account: AccountInterface) {
     return this.db.collection(ACCOUNTS_COLLECTION).add(account);
   }
 }

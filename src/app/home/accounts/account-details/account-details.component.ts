@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatDialog} from '@angular/material';
-import {AccountsService} from "../accounts.service";
+import {AccountInterface, AccountsService} from "../accounts.service";
 import {ACCOUNT_ICON_OPTIONS} from "../constants";
 
 @Component({
@@ -13,7 +12,7 @@ import {ACCOUNT_ICON_OPTIONS} from "../constants";
 export class AccountDetailsComponent implements OnInit {
   accountIconOptions = ACCOUNT_ICON_OPTIONS;
   accountForm: FormGroup;
-  item: any;
+  item: AccountInterface;
 
   validation_messages = {
     'name': [
@@ -27,8 +26,7 @@ export class AccountDetailsComponent implements OnInit {
   constructor(public accountsService: AccountsService,
               private route: ActivatedRoute,
               private fb: FormBuilder,
-              private router: Router,
-              public dialog: MatDialog) {
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -36,7 +34,6 @@ export class AccountDetailsComponent implements OnInit {
       const data = routeData['data'];
       if (data) {
         this.item = data.payload.data();
-        console.log(this.item);
         this.item.id = data.payload.id;
         this.createForm();
       }
