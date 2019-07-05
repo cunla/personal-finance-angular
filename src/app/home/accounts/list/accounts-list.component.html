@@ -33,7 +33,7 @@
           {{item.payload.doc.data().name}}
         </h5>
         <p>
-          Balance: {{item.payload.doc.data().balance || 0}}
+          Balance: {{item.payload.doc.data().starting_balance || 0 | number: 1.1-1}}
           <fa-icon *ngIf="item.payload.doc.data().currency_icon"
                    [icon]="item.payload.doc.data().currency_icon">
           </fa-icon>
