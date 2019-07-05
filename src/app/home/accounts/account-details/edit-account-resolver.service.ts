@@ -17,7 +17,7 @@ const EMPTY_ACCOUNT: AccountInterface = {
 }
 
 @Injectable()
-export class EditAccountResolver implements Resolve<any> {
+export class AccountResolver implements Resolve<any> {
 
   constructor(public accountsService: AccountsService) {
   }

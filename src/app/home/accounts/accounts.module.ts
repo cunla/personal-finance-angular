@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {AccountsListComponent} from "./list/accounts-list.component";
 import {AccountDetailsComponent} from "./account-details/account-details.component";
 import {RouterModule, Routes} from "@angular/router";
-import {EditAccountResolver} from "./account-details/edit-account-resolver.service";
+import {AccountResolver} from "./account-details/edit-account-resolver.service";
 import {MatButtonModule, MatDialogModule, MatInputModule, MatSelectModule, MatSliderModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AccountsService} from "./accounts.service";
@@ -13,8 +13,8 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 const routes: Routes = [
   {path: '', redirectTo: 'list', pathMatch: 'full'},
   {path: 'list', component: AccountsListComponent},
-  {path: 'new-account', component: AccountDetailsComponent, resolve: {data: EditAccountResolver}},
-  {path: 'details/:id', component: AccountDetailsComponent, resolve: {data: EditAccountResolver}}
+  {path: 'new-account', component: AccountDetailsComponent, resolve: {data: AccountResolver}},
+  {path: 'details/:id', component: AccountDetailsComponent, resolve: {data: AccountResolver}}
 ];
 
 @NgModule({
@@ -36,7 +36,7 @@ const routes: Routes = [
     ReactiveFormsModule,
   ],
   providers: [
-    EditAccountResolver,
+    AccountResolver,
     AccountsService,
   ],
 })

@@ -27,10 +27,6 @@ export class AccountsService {
   constructor(public db: AngularFirestore) {
   }
 
-  getAvatars() {
-    return this.db.collection('/avatar').valueChanges()
-  }
-
   getAccount(accountKey) {
     return this.db.collection(ACCOUNTS_COLLECTION).doc(accountKey).snapshotChanges();
   }
@@ -52,7 +48,7 @@ export class AccountsService {
     return this.db.collection('accounts',
       ref => ref.where('nameToSearch', '>=', searchValue)
         .where('nameToSearch', '<=', searchValue + '\uf8ff'))
-      .snapshotChanges()
+      .snapshotChanges();
   }
 
 
