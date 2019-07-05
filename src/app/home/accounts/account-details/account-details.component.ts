@@ -22,40 +22,54 @@ export class AccountDetailsComponent implements OnInit {
       {type: 'required', message: 'Starting balance is required.'}
     ]
   };
+  private editMode: boolean;
 
   constructor(public accountsService: AccountsService,
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private router: Router) {
-  }
-
-  ngOnInit() {
+    this.accountForm = this.fb.group({
+      name: ['', Validators.required],
+      balance: [0, Validators.required],
+      color: ['#000000', Validators.required],
+      icon: [['fas', 'user'], Validators.required],
+    });
     this.route.data.subscribe(routeData => {
       const data = routeData['data'];
-      if (data) {
+      if (data.payload) {
         this.item = data.payload.data();
         this.item.id = data.payload.id;
-        this.createForm();
+        this.editMode = true;
+        this.accountForm.get('name').setValue(this.item.name);
+        this.accountForm.get('balance').setValue(this.item.balance);
+        this.accountForm.get('color').setValue(this.item.color);
+        this.accountForm.get('icon').setValue(this.item.icon);
+      } else {
+        this.item = data;
+        this.editMode = false;
       }
     });
   }
 
-  createForm() {
-    this.accountForm = this.fb.group({
-      name: [this.item.name, Validators.required],
-      balance: [this.item.balance, Validators.required],
-      color: [this.item.color, Validators.required],
-      icon: [this.item.icon, Validators.required],
-    });
+  ngOnInit() {
+
   }
 
+
   onSubmit(value) {
-    this.accountsService.updateAccount(this.item.id, value)
-      .then(
+    if (this.editMode) {
+      this.accountsService.updateAccount(this.item.id, value).then(
         res => {
           this.navigateBack();
         }
       );
+    } else {
+      this.accountsService.createAccount(value).then(
+        res => {
+          this.navigateBack();
+        }
+      );
+    }
   }
 
   delete() {

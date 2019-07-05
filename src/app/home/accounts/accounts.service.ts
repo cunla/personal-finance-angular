@@ -8,14 +8,14 @@ export interface AccountInterface {
   name: string;
   balance: number;
   color: string;
-  icon: string;
+  icon: string[];
   last_validated: Date;
   currency: string;
-  currency_icon: string;
+  currency_icon: string[];
   number_of_transactions: number;
   is_default: boolean;
   starting_balance: number;
-  updated: boolean;
+  updated?: boolean;
 }
 
 @Injectable({
