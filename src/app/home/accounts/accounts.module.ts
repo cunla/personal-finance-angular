@@ -4,7 +4,7 @@ import {AccountsListComponent} from "./list/accounts-list.component";
 import {AccountDetailsComponent} from "./account-details/account-details.component";
 import {RouterModule, Routes} from "@angular/router";
 import {EditAccountResolver} from "./account-details/edit-account-resolver.service";
-import {MatButtonModule, MatDialogModule, MatInputModule, MatSliderModule} from "@angular/material";
+import {MatButtonModule, MatDialogModule, MatInputModule, MatSelectModule, MatSliderModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AccountsService} from "./accounts.service";
 import {ComponentsModule} from "../components/components.module";
@@ -31,6 +31,7 @@ const routes: Routes = [
     MatInputModule,
     MatSliderModule,
     MatDialogModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
   ],

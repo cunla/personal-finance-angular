@@ -10,7 +10,7 @@ const EMPTY_ACCOUNT: AccountInterface = {
   icon: ['fas', 'user'],
   last_validated: new Date(),
   currency: 'USD',
-  currency_icon: ['fas', 'user'],
+  currency_icon: ['fas', 'dollar-sign'],
   number_of_transactions: 0,
   is_default: false,
   starting_balance: 0

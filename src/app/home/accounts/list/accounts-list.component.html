@@ -32,7 +32,13 @@
           </fa-icon>
           {{item.payload.doc.data().name}}
         </h5>
-        <p>Balance: {{item.payload.doc.data().balance}}</p>
+        <p>
+          Balance: {{item.payload.doc.data().balance || 0}}
+          <fa-icon *ngIf="item.payload.doc.data().currency_icon"
+                   [icon]="item.payload.doc.data().currency_icon">
+          </fa-icon>
+          <sub>({{item.payload.doc.data().currency}})</sub>
+        </p>
       </div>
       <div class="col col-md-2 actions-col">
         <button (click)="viewDetails(item)" class="btn btn-outline-primary action" type="button">

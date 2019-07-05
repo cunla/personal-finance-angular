@@ -32,13 +32,33 @@
 
           <div class="form-group">
             <mat-form-field class="input-style">
-              <input class="form-control" formControlName="balance" matInput placeholder="Balance" type="number">
+              <input class="form-control" formControlName="starting_balance" matInput placeholder="Starting balance"
+                     type="number">
             </mat-form-field>
-            <ng-container *ngFor="let validation of validation_messages.balance">
+            <ng-container *ngFor="let validation of validation_messages.starting_balance">
               <mat-error
-                *ngIf="accountForm.get('balance').hasError(validation.type) && (accountForm.get('balance').dirty || accountForm.get('balance').touched)">{{validation.message}}</mat-error>
+                *ngIf="accountForm.get('starting_balance').hasError(validation.type) && (accountForm.get('starting_balance').dirty || accountForm.get('starting_balance').touched)">
+                {{validation.message}}
+              </mat-error>
             </ng-container>
           </div>
+
+
+          <mat-form-field>
+            <mat-label>Currency</mat-label>
+            <mat-select
+                        (selectionChange)="currencySelect($event)">
+              <mat-select-trigger>
+                <fa-icon [icon]="accountForm.get('currency_icon').value"></fa-icon>
+                {{accountForm.get('currency').value}}
+              </mat-select-trigger>
+              <mat-option *ngFor="let item of currnecyOptions" [value]="item">
+                <fa-icon [icon]="item.icon"></fa-icon>
+                &nbsp;{{item.name}}
+              </mat-option>
+            </mat-select>
+            <mat-hint>Pick currency for account</mat-hint>
+          </mat-form-field>
 
           <div class="row" *ngIf="editMode">
             <div class="col-md-4">

@@ -9,3 +9,11 @@ export const ACCOUNT_ICON_OPTIONS: OptionInterface[] = [
   {icon: ['fas', 'piggy-bank'], name: 'Piggy bank', value: ['fas', 'piggy-bank']},
   {icon: ['fas', 'university'], name: 'Bank', value: ['fas', 'university']},
 ];
+
+export const CURRENCY_OPTIONS: OptionInterface[] = [
+  {icon: ['fas', 'dollar-sign'], name: 'USD', value: ['fas', 'dollar-sign']},
+  {icon: ['fas', 'dollar-sign'], name: 'CAD', value: ['fas', 'dollar-sign']},
+  {icon: ['fas', 'shekel-sign'], name: 'ILS', value: ['fas', 'shekel-sign']},
+  {icon: ['fas', 'euro-sign'], name: 'EUR', value: ['fas', 'euro-sign']},
+];
+

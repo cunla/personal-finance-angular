@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AccountInterface, AccountsService} from "../accounts.service";
-import {ACCOUNT_ICON_OPTIONS} from "../constants";
+import {ACCOUNT_ICON_OPTIONS, CURRENCY_OPTIONS} from "../constants";
+import {MatSelectChange} from "@angular/material";
 
 @Component({
   selector: 'app-edit-user',
@@ -11,6 +12,7 @@ import {ACCOUNT_ICON_OPTIONS} from "../constants";
 })
 export class AccountDetailsComponent implements OnInit {
   accountIconOptions = ACCOUNT_ICON_OPTIONS;
+  currnecyOptions = CURRENCY_OPTIONS;
   accountForm: FormGroup;
   item: AccountInterface;
 
@@ -18,36 +20,29 @@ export class AccountDetailsComponent implements OnInit {
     'name': [
       {type: 'required', message: 'Name is required.'}
     ],
-    'balance': [
+    'starting_balance': [
       {type: 'required', message: 'Starting balance is required.'}
     ]
   };
   private editMode: boolean;
 
+
   constructor(public accountsService: AccountsService,
               private route: ActivatedRoute,
               private fb: FormBuilder,
               private router: Router) {
-    this.accountForm = this.fb.group({
-      name: ['', Validators.required],
-      balance: [0, Validators.required],
-      color: ['#000000', Validators.required],
-      icon: [['fas', 'user'], Validators.required],
-    });
+
     this.route.data.subscribe(routeData => {
       const data = routeData['data'];
       if (data.payload) {
         this.item = data.payload.data();
         this.item.id = data.payload.id;
         this.editMode = true;
-        this.accountForm.get('name').setValue(this.item.name);
-        this.accountForm.get('balance').setValue(this.item.balance);
-        this.accountForm.get('color').setValue(this.item.color);
-        this.accountForm.get('icon').setValue(this.item.icon);
       } else {
         this.item = data;
         this.editMode = false;
       }
+      this.createForm();
     });
   }
 
@@ -85,4 +80,20 @@ export class AccountDetailsComponent implements OnInit {
     this.router.navigate(['/home']).then();
   }
 
+  private createForm() {
+    this.accountForm = this.fb.group({
+      name: [this.item.name, Validators.required],
+      starting_balance: [this.item.starting_balance, Validators.required],
+      color: [this.item.color, Validators.required],
+      icon: [this.item.icon, Validators.required],
+      currency_icon: [this.item.currency_icon, Validators.required],
+      currency: [this.item.currency, Validators.required],
+    });
+  }
+
+  currencySelect(event: MatSelectChange) {
+    console.log(event);
+    this.accountForm.get('currency').setValue(event.value.name);
+    this.accountForm.get('currency_icon').setValue(event.value.icon);
+  }
 }
