@@ -40,8 +40,8 @@ export class AccountsService {
     return this.db.collection(ACCOUNTS_COLLECTION).doc(accountKey).delete();
   }
 
-  getAccounts() {
-    return this.db.collection(ACCOUNTS_COLLECTION).snapshotChanges();
+  list(orderBy: string = 'name') {
+    return this.db.collection(ACCOUNTS_COLLECTION, ref => ref.orderBy(orderBy)).snapshotChanges();
   }
 
   searchAccounts(searchValue) {
