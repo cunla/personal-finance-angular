@@ -33,11 +33,10 @@ export class CategoryListComponent implements OnInit {
   }
 
   searchByName() {
-    // const value = this.searchValue.toLowerCase();
-    // this.categoryService.search(value)
-    //   .subscribe(result => {
-    //     this.name_filtered_items = result;
-    //   });
+    const value = this.searchValue.toLowerCase();
+    this.categories.init('categories', 'name', {
+      reverse: false, prepend: false, searchValue: value,
+    });
   }
 
   intersection(a, b) {

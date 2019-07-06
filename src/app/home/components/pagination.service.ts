@@ -12,6 +12,7 @@ export interface QueryConfig {
   limit: number; // limit per query
   reverse: boolean; // reverse order?
   prepend: boolean; // prepend to source?
+  searchValue: string;
 }
 
 @Injectable()
@@ -42,17 +43,13 @@ export class PaginationService {
       limit: 10,
       reverse: false,
       prepend: false,
+      searchValue: '',
       ...opts
     };
-
     const first = this.db.collection(this.query.path, ref => {
-      return ref
-        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
-        .limit(this.query.limit);
+      return this.queryFn(ref);
     });
-
-    this.mapAndUpdate(first);
-
+    this.mapAndUpdate(first, true);
     // Create the observable array for consumption in components
     this.data = this._data.asObservable().scan((acc, val) => {
       return this.query.prepend ? val.concat(acc) : acc.concat(val);
@@ -63,12 +60,17 @@ export class PaginationService {
   more() {
     const cursor = this.getCursor();
     const more = this.db.collection(this.query.path, ref => {
-      return ref
-        .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
-        .limit(this.query.limit)
-        .startAfter(cursor);
+      return this.queryFn(ref).startAfter(cursor);
     });
-    this.mapAndUpdate(more);
+    this.mapAndUpdate(more, false);
+  }
+
+  private queryFn(ref) {
+    return ref
+      .where(this.query.field, '>=', this.query.searchValue)
+      .where(this.query.field, '<=', this.query.searchValue + '\uf8ff')
+      .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
+      .limit(this.query.limit);
   }
 
   // Determines the doc snapshot to paginate query
@@ -81,15 +83,17 @@ export class PaginationService {
   }
 
   // Maps the snapshot to usable format the updates source
-  private mapAndUpdate(col: AngularFirestoreCollection<any>) {
-
+  private mapAndUpdate(col: AngularFirestoreCollection<any>, init: boolean = false) {
+    if (init) {
+      this._done.next(false);
+      this._loading.next(false);
+      this._data = new BehaviorSubject([]);
+    }
     if (this._done.value || this._loading.value) {
       return;
     }
-
     // loading
     this._loading.next(true);
-
     // Map snapshot with doc ref (needed for cursor)
     return col.snapshotChanges()
       .do(arr => {
