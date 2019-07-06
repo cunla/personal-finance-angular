@@ -18,8 +18,13 @@
   </div>
 </div>
 
-<div class="list-group users-list">
-  <div *ngFor="let item of items"
+<div class="list-group users-list"
+     infiniteScroll
+     infiniteScrollDistance="4"
+     [infiniteScrollThrottle]="100"
+     (scrolled)="onScroll($event)">
+
+  <div *ngFor="let item of categories.data | async"
        class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="row">
       <div class="col col-md-2 image-col">
@@ -27,19 +32,19 @@
       </div>
       <div class="col col-md-8 text-col">
         <h5 class="mb-1">
-          <fa-icon *ngIf="item.payload.doc.data().icon"
-                   [icon]="item.payload.doc.data().icon"
-                   [styles]="{'color': item.payload.doc.data().color}">
+          <fa-icon *ngIf="item.icon"
+                   [icon]="item.icon"
+                   [styles]="{'color': item.color}">
           </fa-icon>
-          {{item.payload.doc.data().name}}
+          {{item.name}}
         </h5>
         <p>
           Total spending:
-          <app-number [value]="item.payload.doc.data().balance"></app-number>
+          <app-number [value]="item.balance"></app-number>
         </p>
       </div>
       <div class="col col-md-2 actions-col">
-        <button [routerLink]="'../details/'+item.payload.doc.id"
+        <button [routerLink]="'../details/'+item.id"
                 class="btn btn-outline-primary action" type="button">
           <fa-icon icon="arrow-circle-right"></fa-icon>
         </button>

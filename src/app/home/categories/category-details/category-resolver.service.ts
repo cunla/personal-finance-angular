@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from "@angular/router";
-import {CategoryInterface, CategoryService} from "../categories.service";
+import {CategoryInterface, CategoryService} from "../categories-pagination.service";
 
 
 const EMPTY_CATEGORY: CategoryInterface = {

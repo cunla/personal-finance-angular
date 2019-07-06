@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AccountInterface} from "../../accounts/accounts.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {CategoryService} from "../categories.service";
+import {ActivatedRoute} from "@angular/router";
 import {CATEGORY_ICON_OPTIONS} from "../constants";
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
+import {CategoryService} from "../categories-pagination.service";
 
 @Component({
   selector: 'app-category-details',

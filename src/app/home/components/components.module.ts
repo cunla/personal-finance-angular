@@ -10,6 +10,7 @@ import {far} from '@fortawesome/free-regular-svg-icons';
 import {fab} from "@fortawesome/free-brands-svg-icons";
 import {ColorPickerModule} from "ngx-color-picker";
 import {NumberComponent} from './number/number.component';
+import {PaginationService} from "./pagination.service";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,9 @@ import {NumberComponent} from './number/number.component';
     ReactiveFormsModule,
     MatSelectModule,
     ColorPickerModule,
+  ],
+  providers: [
+    PaginationService,
   ]
 })
 export class ComponentsModule {

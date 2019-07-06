@@ -5,10 +5,11 @@ import {CategoryDetailsComponent} from './category-details/category-details.comp
 import {CategoryListComponent} from './list/category-list.component';
 import {ComponentsModule} from "../components/components.module";
 import {CategoryResolver} from "./category-details/category-resolver.service";
-import {CategoryService} from "./categories.service";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {MatButtonModule, MatDialogModule, MatInputModule, MatSelectModule, MatSliderModule} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import {CategoryService} from "./categories-pagination.service";
 
 const routes: Routes = [
   {path: '', redirectTo: 'list', pathMatch: 'full'},
@@ -23,6 +24,7 @@ const routes: Routes = [
     CategoryListComponent,
   ],
   imports: [
+    InfiniteScrollModule,
     CommonModule,
     ComponentsModule,
     FontAwesomeModule,

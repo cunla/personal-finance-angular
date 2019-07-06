@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {CategoryService} from "../categories.service";
+import {CategoryService} from "../categories-pagination.service";
 
 @Component({
   selector: 'app-categories',
@@ -9,42 +9,38 @@ import {CategoryService} from "../categories.service";
 })
 export class CategoryListComponent implements OnInit {
 
-
   searchValue: string = "";
   items: Array<any>;
-  age_filtered_items: Array<any>;
   name_filtered_items: Array<any>;
 
-  constructor(public categoryService: CategoryService,
+  constructor(public categories: CategoryService,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.getData();
+    // this.getData();
   }
 
-  getData() {
-    this.categoryService.list().subscribe(result => {
-      this.items = result;
-      this.age_filtered_items = result;
-      this.name_filtered_items = result;
-    });
-  }
+  // getData() {
+  //   this.categoryService.list().subscribe(result => {
+  //     this.items = result;
+  //     this.name_filtered_items = result;
+  //   });
+  // }
 
   viewDetails(item) {
     this.router.navigate(['./details/' + item.payload.doc.id]).then();
   }
 
   searchByName() {
-    const value = this.searchValue.toLowerCase();
-    this.categoryService.search(value)
-      .subscribe(result => {
-        this.name_filtered_items = result;
-        this.items = this.combineLists(result, this.age_filtered_items);
-      });
+    // const value = this.searchValue.toLowerCase();
+    // this.categoryService.search(value)
+    //   .subscribe(result => {
+    //     this.name_filtered_items = result;
+    //   });
   }
 
-  combineLists(a, b) {
+  intersection(a, b) {
     const result = [];
     a.filter(x => {
       return b.filter(x2 => {
@@ -54,6 +50,10 @@ export class CategoryListComponent implements OnInit {
       });
     });
     return result;
+  }
+
+  onScroll(e) {
+    this.categories.more();
   }
 
 }
