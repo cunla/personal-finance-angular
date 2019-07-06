@@ -45,7 +45,7 @@ export class AccountsService {
   }
 
   searchAccounts(searchValue) {
-    return this.db.collection('accounts',
+    return this.db.collection(ACCOUNTS_COLLECTION,
       ref => ref.where('nameToSearch', '>=', searchValue)
         .where('nameToSearch', '<=', searchValue + '\uf8ff'))
       .snapshotChanges();
