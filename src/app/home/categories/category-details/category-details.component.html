@@ -1,0 +1,57 @@
+<div class="edit-page">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li aria-current="page" class="breadcrumb-item active">
+        {{editMode ? 'Edit' : 'Create'}} Category
+      </li>
+    </ol>
+  </nav>
+  <div class="page-content">
+    <div class="row">
+      <div class="col col-md-4"></div>
+      <div class="col col-md-8">
+        <form (ngSubmit)="onSubmit(categoryForm.value)"
+              [formGroup]="categoryForm" class="edit-form" novalidate>
+
+          <app-icon-picker [formGroup]="categoryForm"
+                           [options]="categoryIconOptions"
+                           controlName="icon"
+                           colorControlName="color"
+                           name="Icon">
+          </app-icon-picker>
+
+          <div class="form-group">
+            <mat-form-field class="input-style">
+              <input class="form-control" formControlName="name" matInput placeholder="Name">
+            </mat-form-field>
+            <ng-container *ngFor="let validation of validation_messages.name">
+              <mat-error
+                *ngIf="categoryForm.get('name').hasError(validation.type) && (categoryForm.get('name').dirty || categoryForm.get('name').touched)">{{validation.message}}</mat-error>
+            </ng-container>
+          </div>
+
+
+          <div class="row" *ngIf="editMode">
+            <div class="col-md-4">
+              <button (click)="navigateBack()" mat-raised-button type="button">Cancel</button>
+            </div>
+            <div class="col-md-4">
+              <button [disabled]="!categoryForm.valid" color="primary" mat-raised-button type="submit">Save</button>
+            </div>
+            <div class="col-md-4">
+              <button (click)="delete()" color="warn" mat-raised-button type="button">Delete</button>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="!editMode">
+            <div class="offset-md-8 col-md-4">
+              <button [disabled]="!categoryForm.valid" color="primary" mat-raised-button type="submit">
+                Create
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
