@@ -31,10 +31,6 @@ export class AccountsListComponent implements OnInit {
       });
   }
 
-  viewDetails(item) {
-    this.router.navigate(['/details/' + item.payload.doc.id]).then();
-  }
-
   searchByName() {
     const value = this.searchValue.toLowerCase();
     this.accountsService.searchAccounts(value)

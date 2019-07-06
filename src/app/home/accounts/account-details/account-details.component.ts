@@ -4,9 +4,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AccountInterface, AccountsService} from "../accounts.service";
 import {ACCOUNT_ICON_OPTIONS, CURRENCY_OPTIONS} from "../constants";
 import {MatSelectChange} from "@angular/material";
+import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-edit-user',
+  selector: 'app-account-details',
   templateUrl: './account-details.component.html',
   styleUrls: ['./account-details.component.scss']
 })
@@ -29,8 +30,8 @@ export class AccountDetailsComponent implements OnInit {
 
   constructor(public accountsService: AccountsService,
               private route: ActivatedRoute,
-              private fb: FormBuilder,
-              private router: Router) {
+              private location: Location,
+              private fb: FormBuilder) {
 
     this.route.data.subscribe(routeData => {
       const data = routeData['data'];
@@ -77,7 +78,7 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   navigateBack() {
-    this.router.navigate(['/home']).then();
+    this.location.back();
   }
 
   private createForm() {

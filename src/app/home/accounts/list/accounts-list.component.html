@@ -33,8 +33,9 @@
           {{item.payload.doc.data().name}}
         </h5>
         <p>
-          Balance: <app-number [value]="item.payload.doc.data().starting_balance"></app-number>
-<!--          {{(item.payload.doc.data().starting_balance || 0) | number: '1.1-1'}}-->
+          Balance:
+          <app-number [value]="item.payload.doc.data().starting_balance"></app-number>
+          <!--          {{(item.payload.doc.data().starting_balance || 0) | number: '1.1-1'}}-->
           <fa-icon *ngIf="item.payload.doc.data().currency_icon"
                    [icon]="item.payload.doc.data().currency_icon">
           </fa-icon>
@@ -42,7 +43,8 @@
         </p>
       </div>
       <div class="col col-md-2 actions-col">
-        <button (click)="viewDetails(item)" class="btn btn-outline-primary action" type="button">
+        <button [routerLink]="'../details/'+item.payload.doc.id"
+                class="btn btn-outline-primary action" type="button">
           <fa-icon icon="arrow-circle-right"></fa-icon>
         </button>
       </div>
