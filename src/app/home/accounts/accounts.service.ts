@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
-
-export const ACCOUNTS_COLLECTION = 'accounts';
+import {PaginationService} from "../components/pagination.service";
 
 export interface AccountInterface {
   id: number;
@@ -21,38 +20,12 @@ export interface AccountInterface {
 @Injectable({
   providedIn: 'root'
 })
-export class AccountsService {
+export class AccountsService extends PaginationService{
 
 
-  constructor(public db: AngularFirestore) {
+  constructor(public afs: AngularFirestore) {
+    super(afs);
+    super.init('accounts', 'name', {reverse: false, prepend: false});
   }
 
-  getAccount(accountKey) {
-    return this.db.collection(ACCOUNTS_COLLECTION).doc(accountKey).snapshotChanges();
-  }
-
-  updateAccount(accountKey, value) {
-    value.nameToSearch = value.name.toLowerCase();
-    return this.db.collection(ACCOUNTS_COLLECTION).doc(accountKey).set(value);
-  }
-
-  deleteAccount(accountKey) {
-    return this.db.collection(ACCOUNTS_COLLECTION).doc(accountKey).delete();
-  }
-
-  list(orderBy: string = 'name') {
-    return this.db.collection(ACCOUNTS_COLLECTION, ref => ref.orderBy(orderBy)).snapshotChanges();
-  }
-
-  searchAccounts(searchValue) {
-    return this.db.collection(ACCOUNTS_COLLECTION,
-      ref => ref.where('nameToSearch', '>=', searchValue)
-        .where('nameToSearch', '<=', searchValue + '\uf8ff'))
-      .snapshotChanges();
-  }
-
-
-  createAccount(account: AccountInterface) {
-    return this.db.collection(ACCOUNTS_COLLECTION).add(account);
-  }
 }

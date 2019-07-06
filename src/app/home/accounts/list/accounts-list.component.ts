@@ -13,26 +13,18 @@ export class AccountsListComponent implements OnInit {
   items: Array<any>;
   name_filtered_items: Array<any>;
 
-  constructor(public accountsService: AccountsService,
+  constructor(public accounts: AccountsService,
               private router: Router) {
   }
 
   ngOnInit() {
-    this.getData();
   }
 
-  getData() {
-    this.accountsService.list().subscribe(result => {
-      this.items = result;
-      this.name_filtered_items = result;
-    });
-  }
 
   searchByName() {
     const value = this.searchValue.toLowerCase();
-    this.accountsService.searchAccounts(value)
-      .subscribe(result => {
-        this.name_filtered_items = result;
-      });
+    this.accounts.init('accounts', 'name', {
+      reverse: false, prepend: false, searchValue: value,
+    });
   }
 }

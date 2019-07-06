@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AccountInterface, AccountsService} from "../accounts.service";
 import {ACCOUNT_ICON_OPTIONS, CURRENCY_OPTIONS} from "../constants";
 import {MatSelectChange} from "@angular/material";
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-account-details',
@@ -54,13 +54,13 @@ export class AccountDetailsComponent implements OnInit {
 
   onSubmit(value) {
     if (this.editMode) {
-      this.accountsService.updateAccount(this.item.id, value).then(
+      this.accountsService.update(this.item.id, value).then(
         res => {
           this.navigateBack();
         }
       );
     } else {
-      this.accountsService.createAccount(value).then(
+      this.accountsService.create(value).then(
         res => {
           this.navigateBack();
         }
@@ -69,7 +69,7 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   delete() {
-    this.accountsService.deleteAccount(this.item.id).then(
+    this.accountsService.delete(this.item.id).then(
       res => {
         this.navigateBack();
       }, err => {

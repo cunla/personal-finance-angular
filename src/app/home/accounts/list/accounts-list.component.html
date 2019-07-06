@@ -1,7 +1,9 @@
 <div class="row">
   <div class="col-md-3 offset-md-1">
     <div class="input-group">
-      <input (keyup)="searchByName()" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}"
+      <input (keyup)="searchByName()"
+             [(ngModel)]="searchValue"
+             [ngModelOptions]="{standalone: true}"
              class="form-control"
              placeholder="Search by name..." type="text">
       <div class="input-group-append">
@@ -19,31 +21,31 @@
 </div>
 
 <div class="list-group users-list">
-  <div *ngFor="let item of items" class="list-group-item list-group-item-action flex-column align-items-start">
+  <div *ngFor="let item of accounts.data | async"
+       class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="row">
       <div class="col col-md-2 image-col">
 
       </div>
       <div class="col col-md-8 text-col">
         <h5 class="mb-1">
-          <fa-icon *ngIf="item.payload.doc.data().icon"
-                   [icon]="item.payload.doc.data().icon"
-                   [styles]="{'color': item.payload.doc.data().color}">
+          <fa-icon *ngIf="item.icon"
+                   [icon]="item.icon"
+                   [styles]="{'color': item.color}">
           </fa-icon>
-          {{item.payload.doc.data().name}}
+          {{item.name}}
         </h5>
         <p>
           Balance:
-          <app-number [value]="item.payload.doc.data().starting_balance"></app-number>
-          <!--          {{(item.payload.doc.data().starting_balance || 0) | number: '1.1-1'}}-->
-          <fa-icon *ngIf="item.payload.doc.data().currency_icon"
-                   [icon]="item.payload.doc.data().currency_icon">
+          <app-number [value]="item.starting_balance"></app-number>
+          <fa-icon *ngIf="item.currency_icon"
+                   [icon]="item.currency_icon">
           </fa-icon>
-          {{item.payload.doc.data().currency}}
+          {{item.currency}}
         </p>
       </div>
       <div class="col col-md-2 actions-col">
-        <button [routerLink]="'../details/'+item.payload.doc.id"
+        <button [routerLink]="'../details/'+item.id"
                 class="btn btn-outline-primary action" type="button">
           <fa-icon icon="arrow-circle-right"></fa-icon>
         </button>

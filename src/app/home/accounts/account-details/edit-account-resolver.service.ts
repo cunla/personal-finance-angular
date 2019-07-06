@@ -29,7 +29,7 @@ export class AccountResolver implements Resolve<any> {
       if (!accountId) {
         resolve(EMPTY_ACCOUNT);
       }
-      this.accountsService.getAccount(accountId).subscribe(
+      this.accountsService.get(accountId).subscribe(
         data => {
           resolve(data);
         }
