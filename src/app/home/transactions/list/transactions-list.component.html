@@ -28,7 +28,7 @@
        class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="row">
       <div class="col col-1">
-        {{item.date}}
+        {{item.date.seconds*1000 | date: 'yyyy-MM-dd'}}
       </div>
       <div class="col col-md-8 text-col">
         <h5 class="mb-1">

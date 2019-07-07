@@ -1,16 +1,18 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from "@angular/router";
 import {TransactionInterface, TransactionsService} from "../transactions.service";
+import * as firebase from 'firebase';
+import Timestamp = firebase.firestore.Timestamp;
 
 
 const EMPTY_TRANSACTION: TransactionInterface = {
-  creationTime: new Date(),
-  lastModifiedTime: new Date(),
+  creationTime: Timestamp.now(),
+  lastModifiedTime: Timestamp.now(),
   account: null,
   amount: 0,
   category: null,
   locationName: null,
-  date: new Date(),
+  date: Timestamp.now(),
   id: null,
   title: ''
 }

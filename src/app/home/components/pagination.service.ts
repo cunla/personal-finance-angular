@@ -13,6 +13,7 @@ export interface QueryConfig {
   reverse: boolean; // reverse order?
   prepend: boolean; // prepend to source?
   searchValue: string;
+  filter: boolean;
 }
 
 @Injectable()
@@ -44,6 +45,7 @@ export class PaginationService<T> {
       reverse: false,
       prepend: false,
       searchValue: '',
+      filter: true,
       ...opts
     };
     const first = this.db.collection(this.query.path, ref => {
@@ -66,9 +68,13 @@ export class PaginationService<T> {
   }
 
   private queryFn(ref) {
-    return ref
-      .where(this.query.field, '>=', this.query.searchValue)
-      .where(this.query.field, '<=', this.query.searchValue + '\uf8ff')
+    let res = ref;
+    if (this.query.filter) {
+      res = res.where(this.query.field, '>=', this.query.searchValue)
+        .where(this.query.field, '<=', this.query.searchValue + '\uf8ff')
+    }
+
+    return res
       .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
       .limit(this.query.limit);
   }

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
 import {TransactionsService} from "../transactions.service";
 
 @Component({
@@ -16,9 +15,6 @@ export class TransactionsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.transactions.data.subscribe(res => {
-      console.log(res);
-    });
   }
 
   searchByName() {

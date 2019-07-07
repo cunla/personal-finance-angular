@@ -3,6 +3,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {Location} from "@angular/common";
 import {TransactionInterface, TransactionsService} from "../transactions.service";
+import * as firebase from 'firebase/app';
+import Timestamp = firebase.firestore.Timestamp;
+
 
 @Component({
   selector: 'app-details',
@@ -46,17 +49,18 @@ export class TransactionDetailsComponent implements OnInit {
 
 
   onSubmit(value) {
-    value.lastModifiedTime = new Date();
+    value.lastModifiedTime = firebase.firestore.Timestamp.now();
+    value.date = Timestamp.fromDate(value.date);
     if (this.editMode) {
       this.transactionsService.update(this.item.id, value).then(
-        res => {
+        () => {
           this.navigateBack();
         }
       );
     } else {
-      value.creationTime = new Date();
+      value.creationTime = Timestamp.now();
       this.transactionsService.create(value).then(
-        res => {
+        () => {
           this.navigateBack();
         }
       );
@@ -65,7 +69,7 @@ export class TransactionDetailsComponent implements OnInit {
 
   delete() {
     this.transactionsService.delete(this.item.id).then(
-      res => {
+      () => {
         this.navigateBack();
       }, err => {
         console.log(err);
@@ -81,7 +85,7 @@ export class TransactionDetailsComponent implements OnInit {
       title: [this.item.title, Validators.required],
       amount: [this.item.amount, Validators.required],
       locationName: [this.item.locationName],
-      date: [this.item.date, Validators.required],
+      date: [this.item.date.toDate(), Validators.required],
     });
   }
 }

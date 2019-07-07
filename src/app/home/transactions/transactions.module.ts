@@ -5,6 +5,7 @@ import {TransactionDetailsComponent} from './details/transaction-details.compone
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import {ComponentsModule} from "../components/components.module";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {
   MatButtonModule,
   MatDatepickerModule,
@@ -50,6 +51,7 @@ const routes: Routes = [
   providers: [
     TransactionsService,
     TransactionResolver,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
   ]
 })
 export class TransactionsModule {
