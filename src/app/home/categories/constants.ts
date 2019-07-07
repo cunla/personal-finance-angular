@@ -1,11 +1,15 @@
 import {OptionInterface} from "../components/validation-messages.interface";
 
 export const CATEGORY_ICON_OPTIONS: OptionInterface[] = [
-  {icon: ['fas', 'credit-card'], name: 'Credit card', value: ['fas', 'credit-card']},
-  {icon: ['fab', 'cc-visa'], name: 'VISA', value: ['fab', 'cc-visa']},
-  {icon: ['fab', 'cc-mastercard'], name: 'MasterCard', value: ['fab', 'cc-mastercard']},
-  {icon: ['fas', 'money-bill-wave-alt'], name: 'Cash', value: ['fas', 'money-bill-wave-alt']},
-  {icon: ['fas', 'wallet'], name: 'Wallet', value: ['fas', 'wallet']},
-  {icon: ['fas', 'piggy-bank'], name: 'Piggy bank', value: ['fas', 'piggy-bank']},
-  {icon: ['fas', 'university'], name: 'Bank', value: ['fas', 'university']},
+  {icon: ['fas', 'shopping-cart'], name: 'Shopping cart', value: ['fas', 'shopping-cart']},
+  {icon: ['fas', 'shopping-basket'], name: 'Basket', value: ['fas', 'shopping-basket']},
+  {icon: ['fas', 'hamburger'], name: 'Food', value: ['fas', 'hamburger']},
+  {icon: ['fas', 'cocktail'], name: 'Cocktail', value: ['fas', 'cocktail']},
+  {icon: ['fas', 'glass-cheers'], name: 'glass-cheers', value: ['fas', 'glass-cheers']},
+  {icon: ['fas', 'beer'], name: 'Beer', value: ['fas', 'beer']},
+  {icon: ['fas', 'mug-hot'], name: 'Coffee', value: ['fas', 'mug-hot']},
+  {icon: ['fas', 'syringe'], name: 'Medical', value: ['fas', 'syringe']},
+  {icon: ['fas', 'weight'], name: 'Diet', value: ['fas', 'weight']},
+  {icon: ['fas', 'map-marked-alt'], name: 'Travelling', value: ['fas', 'map-marked-alt']},
+  {icon: ['fas', 'dumbbell'], name: 'Gym', value: ['fas', 'dumbbell']},
 ];
