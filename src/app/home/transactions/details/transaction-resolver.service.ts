@@ -4,11 +4,13 @@ import {TransactionInterface, TransactionsService} from "../transactions.service
 
 
 const EMPTY_TRANSACTION: TransactionInterface = {
+  creationTime: new Date(),
+  lastModifiedTime: new Date(),
   account: null,
   amount: 0,
   category: null,
   locationName: null,
-  time: new Date(),
+  date: new Date(),
   id: null,
   title: ''
 }

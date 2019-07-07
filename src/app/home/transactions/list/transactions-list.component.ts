@@ -11,38 +11,21 @@ export class TransactionsListComponent implements OnInit {
 
 
   searchValue: string = "";
-  items: Array<any>;
-  name_filtered_items: Array<any>;
 
-  constructor(public transactions: TransactionsService,
-              private router: Router) {
+  constructor(public transactions: TransactionsService) {
   }
 
   ngOnInit() {
-  }
-
-
-  viewDetails(item) {
-    this.router.navigate(['./details/' + item.payload.doc.id]).then();
+    this.transactions.data.subscribe(res => {
+      console.log(res);
+    });
   }
 
   searchByName() {
     const value = this.searchValue.toLowerCase();
-    this.transactions.init('transactions', 'name', {
-      reverse: false, prepend: false, searchValue: value,
+    this.transactions.init('transactions', 'title', {
+      reverse: true, prepend: false, searchValue: value,
     });
-  }
-
-  intersection(a, b) {
-    const result = [];
-    a.filter(x => {
-      return b.filter(x2 => {
-        if (x2.payload.doc.id === x.payload.doc.id) {
-          result.push(x2);
-        }
-      });
-    });
-    return result;
   }
 
   onScroll(e) {

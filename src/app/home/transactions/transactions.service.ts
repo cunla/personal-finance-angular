@@ -4,7 +4,9 @@ import {AngularFirestore} from "@angular/fire/firestore";
 
 export interface TransactionInterface {
   id: number;
-  time: Date;
+  creationTime: Date;
+  lastModifiedTime: Date;
+  date: Date;
   title: string;
   locationName: string;
   amount: number;
@@ -19,6 +21,6 @@ export class TransactionsService extends PaginationService<TransactionInterface>
 
   constructor(afs: AngularFirestore) {
     super(afs);
-    super.init('transactions', 'time', {reverse: true, prepend: false});
+    super.init('transactions', 'date', {reverse: true, prepend: false});
   }
 }

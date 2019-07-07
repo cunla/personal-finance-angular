@@ -5,7 +5,15 @@ import {TransactionDetailsComponent} from './details/transaction-details.compone
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import {ComponentsModule} from "../components/components.module";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {MatButtonModule, MatDialogModule, MatInputModule, MatSelectModule, MatSliderModule} from "@angular/material";
+import {
+  MatButtonModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatInputModule,
+  MatNativeDateModule,
+  MatSelectModule,
+  MatSliderModule
+} from "@angular/material";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
 import {TransactionsService} from "./transactions.service";
@@ -14,7 +22,7 @@ import {TransactionResolver} from "./details/transaction-resolver.service";
 const routes: Routes = [
   {path: '', redirectTo: 'list', pathMatch: 'full'},
   {path: 'list', component: TransactionsListComponent},
-  {path: 'new-category', component: TransactionDetailsComponent, resolve: {data: TransactionResolver}},
+  {path: 'new-transaction', component: TransactionDetailsComponent, resolve: {data: TransactionResolver}},
   {path: 'details/:id', component: TransactionDetailsComponent, resolve: {data: TransactionResolver}}
 ];
 
@@ -36,6 +44,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     TransactionsService,
