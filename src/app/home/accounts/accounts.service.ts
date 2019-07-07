@@ -20,8 +20,7 @@ export interface AccountInterface {
 @Injectable({
   providedIn: 'root'
 })
-export class AccountsService extends PaginationService{
-
+export class AccountsService extends PaginationService<AccountInterface> {
 
   constructor(public afs: AngularFirestore) {
     super(afs);

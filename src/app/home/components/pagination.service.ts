@@ -16,7 +16,7 @@ export interface QueryConfig {
 }
 
 @Injectable()
-export class PaginationService {
+export class PaginationService<T> {
 
   // Source data
   private _done = new BehaviorSubject(false);
@@ -26,7 +26,7 @@ export class PaginationService {
   private query: QueryConfig;
 
   // Observable data
-  data: Observable<any>;
+  data: Observable<T[]>;
   done: Observable<boolean> = this._done.asObservable();
   loading: Observable<boolean> = this._loading.asObservable();
 

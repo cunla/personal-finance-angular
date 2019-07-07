@@ -15,7 +15,7 @@ export interface CategoryInterface {
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryService extends PaginationService {
+export class CategoryService extends PaginationService<CategoryInterface> {
   constructor(afs: AngularFirestore) {
     super(afs);
     super.init('categories', 'name', {reverse: false, prepend: false});
