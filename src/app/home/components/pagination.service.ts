@@ -126,7 +126,6 @@ export class PaginationService<T> {
   }
 
   update(key, value) {
-    value.nameToSearch = value.name.toLowerCase();
     return this.db.collection(this.query.path).doc(key).set(value);
   }
 

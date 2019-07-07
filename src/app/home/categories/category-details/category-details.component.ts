@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AccountInterface} from "../../accounts/accounts.service";
 import {ActivatedRoute} from "@angular/router";
 import {CATEGORY_ICON_OPTIONS} from "../constants";
 import {Location} from '@angular/common';
-import {CategoryService} from "../categories-pagination.service";
+import {CategoryInterface, CategoryService} from "../categories-pagination.service";
 
 @Component({
   selector: 'app-category-details',
@@ -15,7 +14,7 @@ export class CategoryDetailsComponent implements OnInit {
 
   categoryIconOptions = CATEGORY_ICON_OPTIONS;
   categoryForm: FormGroup;
-  item: AccountInterface;
+  item: CategoryInterface;
 
   validation_messages = {
     'name': [
