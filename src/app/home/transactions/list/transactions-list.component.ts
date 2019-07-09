@@ -1,20 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {TransactionInterface, TransactionsService} from "../transactions.service";
-import * as firebase from 'firebase';
-import Timestamp = firebase.firestore.Timestamp;
+import {EMPTY_TRANSACTION, TransactionInterface, TransactionsService} from "../transactions.service";
 
-
-const EMPTY_TRANSACTION: TransactionInterface = {
-  creationTime: firebase.firestore.Timestamp.now(),
-  lastModifiedTime: Timestamp.now(),
-  account: null,
-  amount: 0,
-  category: null,
-  locationName: null,
-  date: Timestamp.now(),
-  id: null,
-  title: ''
-};
 
 @Component({
   selector: 'app-list',

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {TransactionInterface, TransactionsService} from "../transactions.service";
+import {EMPTY_TRANSACTION, TransactionInterface, TransactionsService} from "../transactions.service";
 import * as firebase from 'firebase/app';
 import Timestamp = firebase.firestore.Timestamp;
 
@@ -50,6 +50,8 @@ export class TransactionDetailsComponent implements OnInit, OnChanges {
       value.creationTime = Timestamp.now();
       this.transactionsService.create(value).then(
         () => {
+          this.transaction = EMPTY_TRANSACTION;
+          this.createForm();
           this.navigateBack();
         }
       );

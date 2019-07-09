@@ -16,6 +16,18 @@ export interface TransactionInterface {
   account: string;
 }
 
+export const EMPTY_TRANSACTION: TransactionInterface = {
+  creationTime: firebase.firestore.Timestamp.now(),
+  lastModifiedTime: Timestamp.now(),
+  account: null,
+  amount: 0,
+  category: null,
+  locationName: null,
+  date: Timestamp.now(),
+  id: null,
+  title: ''
+};
+
 @Injectable({
   providedIn: 'root'
 })
