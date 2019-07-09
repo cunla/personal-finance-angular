@@ -51,7 +51,11 @@ export class PaginationService<T> {
     const first = this.db.collection(this.query.path, ref => {
       return this.queryFn(ref);
     });
-    this.mapAndUpdate(first, true);
+    this.data = null;
+    this._done.next(false);
+    this._loading.next(false);
+    this._data = new BehaviorSubject([]);
+    this.mapAndUpdate(first);
     // Create the observable array for consumption in components
     this.data = this._data.asObservable().scan((acc, val) => {
       return this.query.prepend ? val.concat(acc) : acc.concat(val);
@@ -64,16 +68,15 @@ export class PaginationService<T> {
     const more = this.db.collection(this.query.path, ref => {
       return this.queryFn(ref).startAfter(cursor);
     });
-    this.mapAndUpdate(more, false);
+    this.mapAndUpdate(more);
   }
 
   private queryFn(ref) {
     let res = ref;
     if (this.query.filter) {
       res = res.where(this.query.field, '>=', this.query.searchValue)
-        .where(this.query.field, '<=', this.query.searchValue + '\uf8ff')
+        .where(this.query.field, '<=', this.query.searchValue + '\uf8ff');
     }
-
     return res
       .orderBy(this.query.field, this.query.reverse ? 'desc' : 'asc')
       .limit(this.query.limit);
@@ -89,12 +92,7 @@ export class PaginationService<T> {
   }
 
   // Maps the snapshot to usable format the updates source
-  private mapAndUpdate(col: AngularFirestoreCollection<any>, init: boolean = false) {
-    if (init) {
-      this._done.next(false);
-      this._loading.next(false);
-      this._data = new BehaviorSubject([]);
-    }
+  private mapAndUpdate(col: AngularFirestoreCollection<any>) {
     if (this._done.value || this._loading.value) {
       return;
     }

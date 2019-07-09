@@ -18,13 +18,10 @@ import {
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
 import {TransactionsService} from "./transactions.service";
-import {TransactionResolver} from "./details/transaction-resolver.service";
 
 const routes: Routes = [
   {path: '', redirectTo: 'list', pathMatch: 'full'},
   {path: 'list', component: TransactionsListComponent},
-  {path: 'new-transaction', component: TransactionDetailsComponent, resolve: {data: TransactionResolver}},
-  {path: 'details/:id', component: TransactionDetailsComponent, resolve: {data: TransactionResolver}}
 ];
 
 @NgModule({
@@ -50,7 +47,6 @@ const routes: Routes = [
   ],
   providers: [
     TransactionsService,
-    TransactionResolver,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
   ]
 })

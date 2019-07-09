@@ -11,39 +11,49 @@
   </div>
 
   <div class="offset-md-6 col-md-1">
-    <a class="nav-link" routerLink="../new-transaction">
+    <a class="nav-link" (click)="selectTransaction(null)">
       <fa-icon icon="plus-square"></fa-icon>
     </a>
 
   </div>
 </div>
 
-<div class="list-group users-list"
+<div class="row"
      infiniteScroll
      infiniteScrollDistance="4"
      [infiniteScrollThrottle]="100"
      (scrolled)="onScroll($event)">
-
-  <div *ngFor="let item of transactions.data | async"
-       class="list-group-item list-group-item-action flex-column align-items-start">
-    <div class="row">
-      <div class="col col-1">
-        {{item.date.seconds*1000 | date: 'yyyy-MM-dd'}}
-      </div>
-      <div class="col col-md-8 text-col">
-        <h5 class="mb-1">
-          {{item.title}}
-        </h5>
-        <p>
+  <div class="col col-md-8">
+    <div *ngFor="let item of transactions.data | async"
+         class="list-group-item list-group-item-action flex-column align-items-start"
+         [ngClass]="selectedTransaction==item? 'highlight':''"
+         (click)="selectTransaction(item)">
+      <div class="row">
+        <div class="col col-md-3">
+          {{item.date?.seconds * 1000 | date: 'yyyy-MM-dd'}}
+        </div>
+        <div class="col col-md-3 text-col">
+          <h5 class="mb-4">
+            {{item.title}}
+          </h5>
+        </div>
+        <div class="col col-md-3">
           <app-number [value]="item.amount"></app-number>
-        </p>
-      </div>
-      <div class="col col-md-2 actions-col">
-        <button [routerLink]="'../details/'+item.id"
-                class="btn btn-outline-primary action" type="button">
-          <fa-icon icon="arrow-circle-right"></fa-icon>
-        </button>
+        </div>
+        <!--
+        <div class="col col-md-2 actions-col">
+          <button [routerLink]="'../details/'+item.id"
+                  class="btn btn-outline-primary action" type="button">
+            <fa-icon icon="arrow-circle-right"></fa-icon>
+          </button>
+        </div>
+        -->
       </div>
     </div>
+  </div>
+  <div class="col col-md-4">
+    <app-transaction-details [transaction]="selectedTransaction"
+                             (changed)="searchByName()">
+    </app-transaction-details>
   </div>
 </div>

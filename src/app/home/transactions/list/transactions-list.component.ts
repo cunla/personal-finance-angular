@@ -1,5 +1,20 @@
 import {Component, OnInit} from '@angular/core';
-import {TransactionsService} from "../transactions.service";
+import {TransactionInterface, TransactionsService} from "../transactions.service";
+import * as firebase from 'firebase';
+import Timestamp = firebase.firestore.Timestamp;
+
+
+const EMPTY_TRANSACTION: TransactionInterface = {
+  creationTime: firebase.firestore.Timestamp.now(),
+  lastModifiedTime: Timestamp.now(),
+  account: null,
+  amount: 0,
+  category: null,
+  locationName: null,
+  date: Timestamp.now(),
+  id: null,
+  title: ''
+};
 
 @Component({
   selector: 'app-list',
@@ -8,13 +23,16 @@ import {TransactionsService} from "../transactions.service";
 })
 export class TransactionsListComponent implements OnInit {
 
-
   searchValue: string = "";
+  selectedTransaction: TransactionInterface = EMPTY_TRANSACTION;
 
   constructor(public transactions: TransactionsService) {
   }
 
   ngOnInit() {
+    this.transactions.data.subscribe(data => {
+      console.log(data);
+    });
   }
 
   searchByName() {
@@ -26,5 +44,10 @@ export class TransactionsListComponent implements OnInit {
 
   onScroll(e) {
     this.transactions.more();
+  }
+
+  selectTransaction(item: TransactionInterface) {
+    this.selectedTransaction = (item == null) ?
+      this.selectedTransaction = EMPTY_TRANSACTION : item;
   }
 }

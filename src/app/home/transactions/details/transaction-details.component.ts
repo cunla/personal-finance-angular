@@ -1,20 +1,19 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
-import {Location} from "@angular/common";
 import {TransactionInterface, TransactionsService} from "../transactions.service";
 import * as firebase from 'firebase/app';
 import Timestamp = firebase.firestore.Timestamp;
 
 
 @Component({
-  selector: 'app-details',
+  selector: 'app-transaction-details',
   templateUrl: './transaction-details.component.html',
   styleUrls: ['./transaction-details.component.scss']
 })
-export class TransactionDetailsComponent implements OnInit {
+export class TransactionDetailsComponent implements OnInit, OnChanges {
+  @Input() transaction: TransactionInterface;
   transactionForm: FormGroup;
-  item: TransactionInterface;
+  @Output() changed = new EventEmitter();
 
   validation_messages = {
     'title': [
@@ -25,34 +24,24 @@ export class TransactionDetailsComponent implements OnInit {
 
 
   constructor(public transactionsService: TransactionsService,
-              private route: ActivatedRoute,
-              private fb: FormBuilder,
-              private location: Location) {
-
-    this.route.data.subscribe(routeData => {
-      const data = routeData['data'];
-      if (data.payload) {
-        this.item = data.payload.data();
-        this.item.id = data.payload.id;
-        this.editMode = true;
-      } else {
-        this.item = data;
-        this.editMode = false;
-      }
-      this.createForm();
-    });
+              private fb: FormBuilder) {
   }
 
   ngOnInit() {
-
+    this.editMode = (this.transaction.id !== null && this.transaction.id !== undefined);
+    this.createForm();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.editMode = (this.transaction.id !== null && this.transaction.id !== undefined);
+    this.createForm();
+  }
 
   onSubmit(value) {
     value.lastModifiedTime = firebase.firestore.Timestamp.now();
-    value.date = Timestamp.fromDate(value.date);
+    // value.date = Timestamp.fromDate(value.date);
     if (this.editMode) {
-      this.transactionsService.update(this.item.id, value).then(
+      this.transactionsService.update(this.transaction.id, value).then(
         () => {
           this.navigateBack();
         }
@@ -68,7 +57,7 @@ export class TransactionDetailsComponent implements OnInit {
   }
 
   delete() {
-    this.transactionsService.delete(this.item.id).then(
+    this.transactionsService.delete(this.transaction.id).then(
       () => {
         this.navigateBack();
       }, err => {
@@ -77,15 +66,16 @@ export class TransactionDetailsComponent implements OnInit {
   }
 
   navigateBack() {
-    this.location.back();
+    this.changed.emit(null);
+    // this.location.back();
   }
 
   private createForm() {
     this.transactionForm = this.fb.group({
-      title: [this.item.title, Validators.required],
-      amount: [this.item.amount, Validators.required],
-      locationName: [this.item.locationName],
-      date: [this.item.date.toDate(), Validators.required],
+      title: [this.transaction.title, Validators.required],
+      amount: [this.transaction.amount, Validators.required],
+      locationName: [this.transaction.locationName],
+      date: [this.transaction.date.toDate(), Validators.required],
     });
   }
 }
